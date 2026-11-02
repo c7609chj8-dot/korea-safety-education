@@ -1,4 +1,4 @@
-// Public business information transcribed from the user-provided registration certificate.
+// Public business information from the registration certificate and subsequent user corrections.
 // The certificate image and corporate registration number are not published.
 export const company = {
   legalName: '주식회사 한국안전교육',
@@ -10,6 +10,6 @@ export const company = {
   businessItems: '건설업, 제조 안전보건교육',
   phone: '055-389-0302',
   phoneHref: 'tel:0553890302',
-  fax: '0504-018-9611',
+  fax: '0504-006-2558',
   invoiceEmail: 'c7609chj@daum.net',
 } as const;
