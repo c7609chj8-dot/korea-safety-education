@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { LegalPage } from '../../components/legal-page';
+import { pageMetadata } from '../../lib/seo';
 
-export const metadata: Metadata = { title: '홈페이지 이용안내 | 한국안전교육' };
+export const metadata = pageMetadata({ title: '홈페이지 이용안내 | 한국안전교육', description: '한국안전교육 홈페이지의 제공 기능, 예시 일정, 교육비와 실제 접수 전 확인 사항, 생성 이미지의 이용 범위를 안내합니다.', path: '/terms', searchable: false });
 
 export default function TermsPage() {
   return <LegalPage title="홈페이지 이용안내" description="교육 안내, 예시 일정과 이미지의 이용 범위를 확인해 주세요.">

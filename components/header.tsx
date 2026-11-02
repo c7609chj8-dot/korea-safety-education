@@ -6,11 +6,11 @@ const links = [
   ['교육 안내', '#guide'], ['교육 일정', '#schedule'], ['자주 묻는 질문', '#faq'], ['오시는 길', '#location'],
 ];
 
-export function Header() {
+export function Header({ publicSite = false }: { publicSite?: boolean }) {
   const [open, setOpen] = useState(false);
   return <>
     <a className="skip-link" href="#main">본문으로 바로가기</a>
-    <div className="preview-note">화면 확인용 사이트입니다. 온라인 신청은 접수되지 않습니다.</div>
+    <div className="preview-note">{publicSite ? '온라인 예약·결제는 제공하지 않습니다. 교육일정과 접수는 전화로 확인해 주세요.' : '화면 확인용 사이트입니다. 온라인 신청은 접수되지 않습니다.'}</div>
     <header className="header">
       <div className="container header-inner">
         <a className="brand" href="#top" aria-label="한국안전교육 홈" onClick={() => setOpen(false)}>

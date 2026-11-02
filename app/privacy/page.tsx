@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
 import { LegalPage } from '../../components/legal-page';
+import { pageMetadata } from '../../lib/seo';
 
-export const metadata: Metadata = { title: '개인정보 처리 안내 | 한국안전교육' };
+export const metadata = pageMetadata({ title: '개인정보 처리 안내 | 한국안전교육', description: '한국안전교육 홈페이지의 개인정보 입력 기능, 호스팅 접속 정보, 외부 링크와 개인정보 문의 방법을 안내합니다.', path: '/privacy', searchable: false });
 
 export default function PrivacyPage() {
   return <LegalPage title="개인정보 처리 안내" description="현재 홈페이지에서 제공하는 기능과 접속 과정의 정보 처리를 안내합니다.">

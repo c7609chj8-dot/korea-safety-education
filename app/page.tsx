@@ -3,6 +3,9 @@ import { HeroSlider } from '../components/hero-slider';
 import { ScheduleDemo } from '../components/schedule-demo';
 import { company } from '../lib/company';
 import Link from 'next/link';
+import { isPublicProduction, organizationStructuredData, pageMetadata, siteDescription, siteTitle } from '../lib/seo';
+
+export const metadata = pageMetadata({ title: siteTitle, description: siteDescription, path: '/' });
 
 const naverMap = `https://map.naver.com/p/search/${encodeURIComponent(company.shortAddress)}`;
 const kakaoMap = `https://map.kakao.com/link/search/${encodeURIComponent(company.shortAddress)}`;
@@ -19,7 +22,8 @@ const faqs = [
 export default function Home() {
   const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
   return <>
-    <Header />
+    <Header publicSite={isPublicProduction} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationStructuredData()).replace(/</g, '\\u003c') }} />
     <main id="main">
       <section className="hero" id="top">
         <div className="container hero-grid">
@@ -81,7 +85,7 @@ export default function Home() {
         </dl>
       </section>
       <nav className="footer-policy-links" aria-label="개인정보 및 이용 안내"><Link href="/privacy">개인정보 처리 안내</Link><Link href="/terms">홈페이지 이용안내</Link><Link href="/education-guide">교육 대상·비용 안내</Link></nav>
-      <div className="footer-bottom"><span>© {today.slice(0, 4)} {company.legalName}</span><span>화면 확인용 · 온라인 예약 접수 전</span></div></div></footer>
+      <div className="footer-bottom"><span>© {today.slice(0, 4)} {company.legalName}</span><span>{isPublicProduction ? '교육 문의 055-389-0302 · 온라인 예약·결제 미운영' : '화면 확인용 · 온라인 예약 접수 전'}</span></div></div></footer>
     <nav className="mobile-actions" aria-label="빠른 문의 및 일정"><a href="tel:0553890302" className="mobile-contact"><span>전화 문의</span><strong>055-389-0302</strong></a><a href="#schedule" className="mobile-schedule">교육 일정 확인 <span aria-hidden="true">↗</span></a></nav>
   </>;
 }

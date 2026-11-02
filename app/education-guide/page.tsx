@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
 import { LegalPage } from '../../components/legal-page';
+import { pageMetadata } from '../../lib/seo';
 
-export const metadata: Metadata = { title: '교육 대상·비용 안내 | 한국안전교육' };
+export const metadata = pageMetadata({ title: '양산 건설업 기초안전보건교육 대상·비용 안내 | 한국안전교육', description: '건설 일용근로자 기초안전보건교육 대상, 기존 이수자의 예외, 4시간 교육과 사업주 비용 부담 원칙을 안내합니다. 양산 한국안전교육 문의 055-389-0302.', path: '/education-guide' });
 
 export default function EducationGuidePage() {
   return <LegalPage title="교육 대상·비용 안내" description="건설업 기초안전보건교육의 대상과 비용 부담 원칙을 확인하세요.">
