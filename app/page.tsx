@@ -1,4 +1,5 @@
 import { Header } from '../components/header';
+import { HeroSlider } from '../components/hero-slider';
 import { ScheduleDemo } from '../components/schedule-demo';
 
 const address = '경남 양산시 북정서길 22, 201호';
@@ -11,27 +12,6 @@ const faqs = [
   ['외국인도 교육을 받을 수 있나요?', '교육 가능 여부와 필요한 서류, 지원 가능한 언어를 방문 전에 전화로 확인해 주세요.'],
   ['주차가 가능한가요?', '교육생 주차가 가능합니다. 주차 위치와 이용 방법은 방문 전에 센터로 문의해 주세요.'],
 ];
-
-function SafetyIllustration() {
-  return <div className="hero-art" aria-hidden="true">
-    <div className="art-topline"><span>KOREA SAFETY EDUCATION</span><span>FIELD SAFETY · YANGSAN</span></div>
-    <svg className="construction-art" viewBox="0 0 520 390" fill="none">
-      <defs><pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" stroke="#a1aa91" strokeWidth=".6" /></pattern><linearGradient id="helmet" x1="150" y1="170" x2="340" y2="360" gradientUnits="userSpaceOnUse"><stop stopColor="#f5dca5"/><stop offset="1" stopColor="#d8ac68"/></linearGradient><radialGradient id="autumn-glow"><stop stopColor="#fff8df" stopOpacity=".65"/><stop offset="1" stopColor="#fff8df" stopOpacity="0"/></radialGradient></defs>
-      <circle cx="260" cy="190" r="210" fill="url(#autumn-glow)"/>
-      <path fill="url(#grid)" opacity=".38" d="M0 0h520v390H0z"/>
-      <g stroke="#8d987e" strokeWidth="1.5" opacity=".85"><path d="M306 326V90h130v236M325 90V70h92v20M324 117h27v33h-27zM371 117h46v33h-46zM324 173h27v33h-27zM371 173h46v33h-46zM371 230h46v33h-46zM64 326V168h90v95M80 193h20v24H80zM119 193h20v24h-20zM80 239h20v24H80zM193 185V44M177 44h181M193 44l58-30 67 30M251 14v30M318 44v46M177 61h181M212 44v17M241 44v17M272 44v17M303 44v17M193 82l-16 30h32l-16 30M193 142l-16 30h32M48 327h420"/></g>
-      <g transform="translate(425 345) rotate(-72)" fill="#b98252" opacity=".8"><path d="M0 0C22 0 32 13 25 28 10 29-2 19 0 0Z"/><path d="m3 4 24 27" stroke="#f9e8cf" strokeWidth="1.1"/></g>
-      <ellipse cx="244" cy="341" rx="142" ry="16" fill="#bdc5af"/>
-      <path d="M128 300c0-68 41-115 104-120v-10c0-7 6-13 13-13h14c7 0 13 6 13 13v11c57 9 93 55 93 119l21 11c7 4 5 16-4 18-86 18-188 18-268 0-9-2-11-14-3-18l17-11Z" fill="url(#helmet)"/>
-      <path d="M233 182v96M271 182v96" stroke="#c2873e" strokeWidth="5"/>
-      <path d="M127 300c72 16 165 16 238 0M146 278c0-26 11-49 25-62" stroke="#b77a35" strokeWidth="3" strokeLinecap="round"/>
-      <path d="m227 229 16 16 30-33" stroke="#58644b" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/>
-      <circle cx="440" cy="46" r="22" stroke="#a0ab90" strokeDasharray="3 4"/>
-      <path d="M440 36v20M430 46h20" stroke="#7b8767"/>
-    </svg>
-    <div className="art-bottomline"><span>안전의 기본을 배우는 시간</span><strong>4<span>HOURS</span></strong></div>
-  </div>;
-}
 
 export default function Home() {
   const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
@@ -48,7 +28,7 @@ export default function Home() {
             <div className="hero-actions"><a href="#schedule" className="button button-dark">교육 일정 확인하기 <span aria-hidden="true">↗</span></a><a href="tel:0553890302" className="hero-phone">전화로 문의하기 <span aria-hidden="true">→</span></a></div>
             <p className="hero-location"><span className="location-dot" aria-hidden="true" />경남 양산시 북정서길 22, 201호</p>
           </div>
-          <SafetyIllustration />
+          <HeroSlider />
         </div>
         <div className="container quick-facts">
           <div><span>01 / 평일 교육</span><strong>13:00–17:00</strong></div>
