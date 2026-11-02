@@ -3,7 +3,13 @@
 import { useState } from 'react';
 
 const links = [
-  ['교육 안내', '#guide'], ['교육 일정', '#schedule'], ['자주 묻는 질문', '#faq'], ['오시는 길', '#location'],
+  ['소개', '#about'],
+  ['강사소개', '#instructors'],
+  ['교육일정', '#schedule'],
+  ['교육사진', '#facility'],
+  ['자료실', '#resources'],
+  ['관련사이트', '#links'],
+  ['오시는 길', '#location'],
 ];
 
 export function Header({ publicSite = false }: { publicSite?: boolean }) {
@@ -20,9 +26,10 @@ export function Header({ publicSite = false }: { publicSite?: boolean }) {
         <button className="menu-toggle" type="button" aria-expanded={open} aria-controls="main-nav" onClick={() => setOpen(!open)}>{open ? '메뉴 닫기' : '메뉴 열기'}</button>
         <nav id="main-nav" className={`nav ${open ? 'nav-open' : ''}`} aria-label="주 메뉴">
           {links.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>)}
-          <a className="nav-call" href="tel:0553890302" onClick={() => setOpen(false)}>전화 상담 <span aria-hidden="true">↗</span></a>
+          <a className="nav-call" href="#contact" onClick={() => setOpen(false)}>상담 신청 <span aria-hidden="true">↗</span></a>
         </nav>
       </div>
     </header>
   </>;
 }
+
