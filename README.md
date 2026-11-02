@@ -17,6 +17,16 @@ npm run build
 npm start
 ```
 
+## Vercel 배포
+
+저장소 루트의 `vercel.json`에서 프레임워크를 Next.js로 지정하고 출력 디렉터리를 프레임워크 기본값으로 사용합니다. `public`은 Next.js 빌드 결과 폴더가 아닙니다.
+
+- Git 저장소의 루트를 프로젝트 Root Directory로 사용합니다.
+- Build Command는 `npm run build`입니다.
+- Output Directory는 수동으로 `public`이나 `out`으로 지정하지 않습니다.
+- 설정 변경 후 최신 커밋으로 새 배포를 실행합니다.
+- 프런트엔드 초안은 Supabase 환경변수 없이 빌드할 수 있습니다.
+
 ## 현재 구현
 
 - 반응형 홈, 교육 안내, 전화·지도 연결, FAQ.
