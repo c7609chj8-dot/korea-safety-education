@@ -1,10 +1,10 @@
 import { Header } from '../components/header';
 import { HeroSlider } from '../components/hero-slider';
 import { ScheduleDemo } from '../components/schedule-demo';
+import { company } from '../lib/company';
 
-const address = '경남 양산시 북정서길 22, 201호';
-const naverMap = `https://map.naver.com/p/search/${encodeURIComponent(address)}`;
-const kakaoMap = `https://map.kakao.com/link/search/${encodeURIComponent(address)}`;
+const naverMap = `https://map.naver.com/p/search/${encodeURIComponent(company.shortAddress)}`;
+const kakaoMap = `https://map.kakao.com/link/search/${encodeURIComponent(company.shortAddress)}`;
 const faqs = [
   ['교육은 몇 시간인가요?', '건설업 기초안전보건교육은 4시간 과정으로 안내하고 있습니다. 평일은 13:00~17:00, 토요일은 사전 예약제로 09:00~13:00에 운영합니다. 방문 전 운영 여부를 확인해 주세요.'],
   ['당일 현장 접수도 가능한가요?', '현장 접수가 가능합니다. 다만 교육 운영 여부와 접수 가능 인원은 방문 전 055-389-0302로 확인해 주세요. 토요일은 사전 예약이 필요합니다.'],
@@ -26,7 +26,7 @@ export default function Home() {
             <p className="hero-tagline">현장의 첫걸음, 안전에서 시작합니다.</p>
             <p className="hero-description">교육시간과 준비물을 확인하고 편하게 문의하세요.<br />한국안전교육이 접수부터 교육까지 안내합니다.</p>
             <div className="hero-actions"><a href="#schedule" className="button button-dark">교육 일정 확인하기 <span aria-hidden="true">↗</span></a><a href="tel:0553890302" className="hero-phone">전화로 문의하기 <span aria-hidden="true">→</span></a></div>
-            <p className="hero-location"><span className="location-dot" aria-hidden="true" />경남 양산시 북정서길 22, 201호</p>
+            <p className="hero-location"><span className="location-dot" aria-hidden="true" />{company.shortAddress}</p>
           </div>
           <HeroSlider />
         </div>
@@ -55,13 +55,27 @@ export default function Home() {
       <section className="section container faq-section" id="faq"><div className="faq-intro"><p className="eyebrow">FREQUENTLY ASKED</p><h2>궁금한 점을<br />먼저 확인하세요.</h2><p>찾으시는 답변이 없으신가요?</p><a href="tel:0553890302" className="text-link">전화 상담하기 <span aria-hidden="true">↗</span></a></div><div className="faq-list">{faqs.map(([q, a], i) => <details key={q}><summary><span className="faq-number">0{i + 1}</span>{q}<span className="faq-plus" aria-hidden="true" /></summary><p>{a}</p></details>)}</div></section>
 
       <section className="location-section" id="location"><div className="container location-grid">
-        <div><p className="eyebrow">COME VISIT US</p><h2>한국안전교육으로<br />오시는 길</h2><p className="location-address">{address}</p><dl className="location-info"><div><dt>교육 문의</dt><dd><a href="tel:0553890302">055-389-0302</a></dd></div><div><dt>팩스</dt><dd>0504-006-2558</dd></div><div><dt>주차 안내</dt><dd>교육생 주차 가능 · 방문 전 위치 문의</dd></div></dl><div className="map-links"><a className="button button-dark" href={naverMap} target="_blank" rel="noopener noreferrer">네이버지도 열기 <span aria-hidden="true">↗</span></a><a className="button button-outline" href={kakaoMap} target="_blank" rel="noopener noreferrer">카카오맵 <span aria-hidden="true">↗</span></a></div></div>
+        <div><p className="eyebrow">COME VISIT US</p><h2>한국안전교육으로<br />오시는 길</h2><p className="location-address">{company.address}</p><dl className="location-info"><div><dt>교육 문의</dt><dd><a href={company.phoneHref}>{company.phone}</a></dd></div><div><dt>팩스</dt><dd>{company.fax}</dd></div><div><dt>세금계산서</dt><dd><a href={`mailto:${company.invoiceEmail}`}>{company.invoiceEmail}</a></dd></div><div><dt>주차 안내</dt><dd>교육생 주차 가능 · 방문 전 위치 문의</dd></div></dl><div className="map-links"><a className="button button-dark" href={naverMap} target="_blank" rel="noopener noreferrer">네이버지도 열기 <span aria-hidden="true">↗</span></a><a className="button button-outline" href={kakaoMap} target="_blank" rel="noopener noreferrer">카카오맵 <span aria-hidden="true">↗</span></a></div></div>
         <div className="location-card"><div className="location-card-top"><span>한국안전교육</span><span>YANGSAN</span></div><div className="building-art" aria-hidden="true"><div className="building-roof"/><div className="building-floor"><span/><span/><span/></div><div className="building-sign">한국안전교육 <b>2F</b></div><div className="building-floor"><span/><span/><span/></div><div className="building-ground"/><div className="tree tree-left"/><div className="tree tree-right"/></div><p>북정서길 22 <span>201호 · 2층</span></p><small>위치 이해를 돕기 위한 일러스트입니다.</small></div>
       </div></section>
 
       <section className="contact-strip"><div className="container"><div><p className="eyebrow">WE ARE HERE TO HELP</p><h2>교육 준비, 편하게 물어보세요.</h2></div><a href="tel:0553890302">055-389-0302 <span aria-hidden="true">↗</span></a></div></section>
     </main>
-    <footer className="footer"><div className="container"><div className="footer-top"><a className="brand" href="#top"><span className="brand-mark" aria-hidden="true">K<span>.</span></span><span><strong>한국안전교육</strong><small>KOREA SAFETY EDUCATION</small></span></a><a href="#top" className="back-top">맨 위로 <span aria-hidden="true">↑</span></a></div><p>대표자 최현주·안정현 <span className="divider">|</span> 사업자등록번호 217-86-02371</p><p>{address} <span className="divider">|</span> 전화 055-389-0302</p><div className="footer-bottom"><span>© {today.slice(0, 4)} 한국안전교육</span><span>화면 확인용 · 온라인 예약 접수 전</span></div></div></footer>
+    <footer className="footer"><div className="container"><div className="footer-top"><a className="brand" href="#top"><span className="brand-mark" aria-hidden="true">K<span>.</span></span><span><strong>한국안전교육</strong><small>KOREA SAFETY EDUCATION</small></span></a><a href="#top" className="back-top">맨 위로 <span aria-hidden="true">↑</span></a></div>
+      <section className="footer-company" id="business-info" aria-label="사업자 정보">
+        <h2>{company.legalName}</h2>
+        <dl className="footer-business-info">
+          <div><dt>공동대표</dt><dd>{company.representatives}</dd></div>
+          <div><dt>사업자등록번호</dt><dd>{company.businessNumber}</dd></div>
+          <div className="business-address"><dt>사업장 소재지</dt><dd>{company.address}</dd></div>
+          <div><dt>업태</dt><dd>{company.businessType}</dd></div>
+          <div><dt>종목</dt><dd>{company.businessItems}</dd></div>
+          <div><dt>전화</dt><dd><a href={company.phoneHref}>{company.phone}</a></dd></div>
+          <div><dt>팩스</dt><dd>{company.fax}</dd></div>
+          <div className="business-email"><dt>세금계산서 이메일</dt><dd><a href={`mailto:${company.invoiceEmail}`}>{company.invoiceEmail}</a></dd></div>
+        </dl>
+      </section>
+      <div className="footer-bottom"><span>© {today.slice(0, 4)} {company.legalName}</span><span>화면 확인용 · 온라인 예약 접수 전</span></div></div></footer>
     <nav className="mobile-actions" aria-label="빠른 문의 및 일정"><a href="tel:0553890302" className="mobile-contact"><span>전화 문의</span><strong>055-389-0302</strong></a><a href="#schedule" className="mobile-schedule">교육 일정 확인 <span aria-hidden="true">↗</span></a></nav>
   </>;
 }
