@@ -50,7 +50,11 @@ export function HeroSlider() {
     aria-roledescription="이미지 슬라이더"
     onMouseEnter={() => setHovered(true)}
     onMouseLeave={() => setHovered(false)}
-    onFocusCapture={() => setPaused(true)}
+    onFocusCapture={event => {
+      // The play control owns its toggle; pausing on its focus would invert a pause click.
+      if (event.target instanceof HTMLElement && event.target.closest('.slider-play')) return;
+      setPaused(true);
+    }}
     onKeyDown={event => {
       if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
       event.preventDefault();
