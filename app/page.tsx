@@ -3,6 +3,7 @@ import Link from 'next/link';
 import QRCode from 'qrcode';
 import { Header } from '../components/header';
 import { HeroSlider } from '../components/hero-slider';
+import { MaterialsLibrary } from '../components/materials-library';
 import { ScheduleDemo } from '../components/schedule-demo';
 import { ShareSite } from '../components/share-site';
 import { company } from '../lib/company';
@@ -12,6 +13,7 @@ export const metadata = pageMetadata({ title: siteTitle, description: siteDescri
 
 const naverMap = `https://map.naver.com/p/search/${encodeURIComponent(company.shortAddress)}`;
 const kakaoMap = `https://map.kakao.com/link/search/${encodeURIComponent(company.shortAddress)}`;
+const embeddedMap = `https://www.google.com/maps?q=${encodeURIComponent(company.address)}&hl=ko&z=17&output=embed`;
 
 const instructors = [
   { name: '최현주', position: '대표이사', field: '안전총괄', initial: '최' },
@@ -52,7 +54,6 @@ const gallery = [
 
 const resources = [
   { type: 'PDF · 안전교육 자료', title: '건설현장 주요 위험작업 안전자료', text: '안전보건공단의 건설현장 위험작업 교육자료를 확인하세요.', href: 'https://www.kosha.or.kr/' },
-  { type: 'PDF · 지원 안내', title: '건설업 안전일터 조성지원 안내', text: '건설업 안전지원 사업의 공식 안내를 확인하세요.', href: 'https://www.kosha.or.kr/' },
 ];
 
 const relatedSites = [
@@ -164,8 +165,8 @@ export default async function Home() {
       <section className="section container faq-section" id="faq"><div className="faq-intro"><p className="eyebrow">FAQ</p><h2>자주 묻는 질문</h2><p>방문 전 많이 궁금해하시는 내용을 확인하세요.</p><a href={company.phoneHref} className="text-link">전화 상담하기 <span aria-hidden="true">↗</span></a></div><div className="faq-list">{faqs.map(([question, answer], index) => <details key={question}><summary><span className="faq-number">{String(index + 1).padStart(2, '0')}</span>{question}<span className="faq-plus" aria-hidden="true" /></summary><p>{answer}</p></details>)}</div></section>
 
       <section className="resource-section section" id="resources"><div className="container">
-        <div className="section-heading"><div><p className="eyebrow">RESOURCES</p><h2>자료실</h2></div><p className="section-description">안전교육과 현장에 필요한<br />공식 자료를 확인하세요.</p></div>
-        <div className="resource-grid">{resources.map((resource) => <a href={resource.href} target="_blank" rel="noopener noreferrer" key={resource.title}><span>{resource.type}</span><h3>{resource.title}</h3><p>{resource.text}</p><strong>자료 열기 <b aria-hidden="true">↗</b></strong></a>)}</div>
+        <div className="section-heading"><div><p className="eyebrow">RESOURCES</p><h2>자료실</h2></div><p className="section-description">안전교육과 현장에 필요한<br />공식·센터 자체 자료를 확인하세요.</p></div>
+        <div className="resource-grid">{resources.map((resource) => <a href={resource.href} target="_blank" rel="noopener noreferrer" key={resource.title}><span>{resource.type}</span><h3>{resource.title}</h3><p>{resource.text}</p><strong>자료 열기 <b aria-hidden="true">↗</b></strong></a>)}<MaterialsLibrary /></div>
       </div></section>
 
       <section className="links-section section" id="links"><div className="container">
@@ -175,7 +176,7 @@ export default async function Home() {
 
       <section className="location-section" id="location"><div className="container location-grid">
         <div><p className="eyebrow">LOCATION</p><h2>오시는 길</h2><h3 className="location-name">한국안전교육</h3><p className="location-address">{company.address}</p><dl className="location-info"><div><dt>전화</dt><dd><a href={company.phoneHref}>{company.phone}</a></dd></div><div><dt>팩스</dt><dd>{company.fax}</dd></div><div><dt>주차</dt><dd>교육생 주차 가능</dd></div></dl><div className="map-links"><a className="button button-dark" href={naverMap} target="_blank" rel="noopener noreferrer">네이버지도 길찾기 <span aria-hidden="true">↗</span></a><a className="button button-outline" href={kakaoMap} target="_blank" rel="noopener noreferrer">카카오맵 <span aria-hidden="true">↗</span></a></div></div>
-        <div className="location-card"><div className="location-card-top"><span>한국안전교육</span><span>YANGSAN</span></div><div className="building-art" aria-hidden="true"><div className="building-roof"/><div className="building-floor"><span/><span/><span/></div><div className="building-sign">한국안전교육 <b>2F</b></div><div className="building-floor"><span/><span/><span/></div><div className="building-ground"/><div className="tree tree-left"/><div className="tree tree-right"/></div><p>북정서길 22 <span>201호 · 2층</span></p><small>위치 이해를 돕기 위한 일러스트입니다.</small></div>
+        <div className="location-map-card"><div className="location-map-top"><span>한국안전교육</span><span>YANGSAN</span></div><iframe className="location-map-frame" title="한국안전교육 위치 지도" src={embeddedMap} loading="lazy" referrerPolicy="no-referrer-when-downgrade" /><div className="location-map-caption"><strong>경남 양산시 북정서길 22</strong><span>201호 · 2층</span></div></div>
       </div></section>
 
       <ShareSite siteUrl={siteUrl} qrCodeSvg={qrCodeSvg} />
