@@ -152,13 +152,17 @@ export function MaterialsLibrary() {
     </button>
 
     {formOpen ? <form className="materials-form" onSubmit={submitUpload}>
+      <p className="materials-public-notice" id="materials-public-notice">
+        <strong>공개 자료 안내</strong>
+        <span>등록한 파일은 누구나 다운로드할 수 있는 자료실에 게시됩니다. 교육자료 외의 파일과 개인정보, 신분증 사본, 수강생 명단, 연락처가 포함된 파일은 등록하지 마세요.</span>
+      </p>
       <label>
         <span>관리자 등록 암호</span>
         <input type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} required />
       </label>
       <label>
         <span>자료 파일 <em>PDF · DOC · DOCX / 최대 10MB</em></span>
-        <input ref={inputRef} type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" onChange={(event) => selectFile(event.target.files?.[0] ?? null)} required />
+        <input ref={inputRef} type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" aria-describedby="materials-public-notice" onChange={(event) => selectFile(event.target.files?.[0] ?? null)} required />
       </label>
       {file ? <p className="materials-selected">선택한 파일: {file.name} · {formatSize(file.size)}</p> : null}
       {isUploading ? <p className="materials-progress" aria-live="polite">자료를 올리는 중입니다. {progress}%</p> : null}
