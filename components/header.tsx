@@ -26,7 +26,7 @@ export function Header({ publicSite = false }: { publicSite?: boolean }) {
         <button className="menu-toggle" type="button" aria-expanded={open} aria-controls="main-nav" onClick={() => setOpen(!open)}>{open ? '메뉴 닫기' : '메뉴 열기'}</button>
         <nav id="main-nav" className={`nav ${open ? 'nav-open' : ''}`} aria-label="주 메뉴">
           {links.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>)}
-          <a className="nav-call" href="#contact" onClick={() => setOpen(false)}>상담 신청 <span aria-hidden="true">↗</span></a>
+          <a className="nav-call" href="#contact" onClick={() => setOpen(false)}>접수 문의 <span aria-hidden="true">↗</span></a>
         </nav>
       </div>
     </header>

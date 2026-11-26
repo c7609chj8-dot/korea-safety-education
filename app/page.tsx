@@ -4,7 +4,7 @@ import QRCode from 'qrcode';
 import { Header } from '../components/header';
 import { HeroSlider } from '../components/hero-slider';
 import { MaterialsLibrary } from '../components/materials-library';
-import { ScheduleDemo } from '../components/schedule-demo';
+import { EducationSchedule } from '../components/education-schedule';
 import { ShareSite } from '../components/share-site';
 import { company } from '../lib/company';
 import { isPublicProduction, organizationStructuredData, pageMetadata, siteDescription, siteTitle, siteUrl } from '../lib/seo';
@@ -85,7 +85,7 @@ export default async function Home() {
             <p className="hero-tagline">안전한 현장의 첫걸음, 교육에서 시작합니다.</p>
             <p className="hero-description">평일 13:00~17:00 · 접수 12:40까지<br />토요일 09:00~13:00 예약제 · 일요일·법정공휴일 휴무<br />신분증 지참 · 교육생 주차 가능</p>
             <div className="hero-actions">
-              <a href="#schedule" className="button button-dark">교육 일정 확인 <span aria-hidden="true">↗</span></a>
+              <a href="#schedule" className="button button-dark">교육시간·접수 안내 <span aria-hidden="true">↗</span></a>
               <a href={`tel:${company.phone.replaceAll('-', '')}`} className="hero-phone">전화 문의 <span aria-hidden="true">→</span></a>
             </div>
             <p className="hero-location"><span className="location-dot" aria-hidden="true" />{company.shortAddress}</p>
@@ -135,9 +135,14 @@ export default async function Home() {
       </section>
 
       <section className="schedule-section section" id="schedule"><div className="container">
-        <div className="section-heading"><div><p className="eyebrow">SCHEDULE</p><h2>교육 일정</h2></div><div className="schedule-heading-note"><span className="outline-tag">일정 미리보기</span><p className="section-description">방문 전 일정을 확인하세요.<br />실제 운영 여부는 전화 확인이 필요합니다.</p></div></div>
+        <div className="section-heading"><div><p className="eyebrow">SCHEDULE</p><h2>교육시간·접수 안내</h2></div><div className="schedule-heading-note"><span className="outline-tag">전화·방문 접수</span><p className="section-description">교육일과 접수 가능 여부를 전화로 확인해 주세요.<br />토요일 교육은 사전 예약이 필요합니다.</p></div></div>
         <div className="schedule-summary" aria-label="교육 운영 안내"><div><span>평일 교육 · 접수 12:40까지</span><strong>월요일~금요일 13:00~17:00</strong></div><div><span>토요일 예약제</span><strong>토요일 09:00~13:00</strong></div><div><span>휴무 안내</span><strong>일요일·법정공휴일 휴무</strong></div></div>
-        <ScheduleDemo />
+        <ol className="registration-steps" aria-label="교육 접수 방법">
+          <li><span>01</span><div><h3>전화로 교육일 확인</h3><p><a href={company.phoneHref}>{company.phone}</a>로 교육일과 접수 가능 인원을 확인하세요. 토요일은 전화로 미리 예약해 주세요.</p></div></li>
+          <li><span>02</span><div><h3>신분증 지참 후 방문</h3><p>평일은 12:40까지 접수해 주세요. 토요일은 예약 시 안내받은 시간에 방문하세요.</p></div></li>
+          <li><span>03</span><div><h3>현장에서 접수 안내</h3><p>본인 확인과 교육비 등 접수 절차를 안내받으세요. 홈페이지에서는 온라인 신청·결제를 받지 않습니다.</p></div></li>
+        </ol>
+        <EducationSchedule />
       </div></section>
 
       <section className="section container facility-section" id="facility">
@@ -181,13 +186,13 @@ export default async function Home() {
 
       <ShareSite siteUrl={siteUrl} qrCodeSvg={qrCodeSvg} />
 
-      <section className="contact-strip" id="contact"><div className="container"><div><p className="eyebrow">교육 신청 및 문의</p><h2>안전교육, 지금 편하게 상담하세요.</h2><p>교육일정과 준비물을 친절하게 안내해 드립니다.</p></div><div className="contact-actions"><a href={company.phoneHref}>전화 상담 {company.phone} <span aria-hidden="true">↗</span></a><a href={`sms:01072592558?body=${encodeURIComponent('안녕하세요. 건설업 기초안전보건교육 문의드립니다.')}`}>문자 문의 <span aria-hidden="true">↗</span></a></div></div></section>
+      <section className="contact-strip" id="contact"><div className="container"><div><p className="eyebrow">전화 접수 및 문의</p><h2>안전교육, 지금 편하게 상담하세요.</h2><p>교육일정과 준비물을 친절하게 안내해 드립니다.</p></div><div className="contact-actions"><a href={company.phoneHref}>전화 상담 {company.phone} <span aria-hidden="true">↗</span></a><a href={`sms:01072592558?body=${encodeURIComponent('안녕하세요. 건설업 기초안전보건교육 문의드립니다.')}`}>문자 문의 <span aria-hidden="true">↗</span></a></div></div></section>
     </main>
     <footer className="footer"><div className="container"><div className="footer-top"><a className="brand" href="#top"><span className="brand-mark" aria-hidden="true">K<span>.</span></span><span><strong>한국안전교육</strong><small>KOREA SAFETY EDUCATION</small></span></a><a href="#top" className="back-top">맨 위로 <span aria-hidden="true">↑</span></a></div>
       <section className="footer-company" id="business-info" aria-label="사업자 정보"><h2>{company.legalName}</h2><dl className="footer-business-info"><div><dt>공동대표</dt><dd>{company.representatives}</dd></div><div><dt>사업자등록번호</dt><dd>{company.businessNumber}</dd></div><div className="business-address"><dt>사업장 소재지</dt><dd>{company.address}</dd></div><div><dt>전화</dt><dd><a href={company.phoneHref}>{company.phone}</a></dd></div><div><dt>팩스</dt><dd>{company.fax}</dd></div></dl></section>
       <nav className="footer-policy-links" aria-label="개인정보 및 이용 안내"><Link href="/privacy">개인정보 처리 안내</Link><Link href="/terms">홈페이지 이용안내</Link><Link href="/education-guide">교육 대상·비용 안내</Link></nav>
       <div className="footer-bottom"><span>© {today.slice(0, 4)} {company.legalName}</span><span>{isPublicProduction ? '교육 문의 055-389-0302 · 온라인 예약·결제 미운영' : '화면 확인용 · 온라인 신청은 접수되지 않습니다.'}</span></div></div></footer>
-    <nav className="mobile-actions" aria-label="빠른 문의 및 일정"><a href={company.phoneHref} className="mobile-contact"><span>전화 문의</span><strong>{company.phone}</strong></a><a href="#schedule" className="mobile-schedule">교육 일정 확인 <span aria-hidden="true">↗</span></a></nav>
+    <nav className="mobile-actions" aria-label="빠른 문의 및 접수 안내"><a href={company.phoneHref} className="mobile-contact"><span>전화 문의</span><strong>{company.phone}</strong></a><a href="#schedule" className="mobile-schedule">교육시간·접수 안내 <span aria-hidden="true">↗</span></a></nav>
   </>;
 }
 

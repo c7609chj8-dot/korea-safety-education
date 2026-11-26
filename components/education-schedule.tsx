@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef, useState, useSyncExternalStore } from 'react';
-import Link from 'next/link';
+import { useState, useSyncExternalStore } from 'react';
 import { getKoreanDateKey, getScheduleDay } from '../lib/schedule';
+import { company } from '../lib/company';
 
 const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
 const dateKey = (year: number, month: number, day: number) => `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
@@ -20,7 +20,7 @@ function subscribeToDate(onChange: () => void) {
 
 const getServerDate = () => null;
 
-export function ScheduleDemo() {
+export function EducationSchedule() {
   // Static HTML must not freeze "today" at deployment time. The server and the
   // first hydration render share a placeholder; the browser then reads Seoul's date.
   const today = useSyncExternalStore(subscribeToDate, getKoreanDateKey, getServerDate);
@@ -32,9 +32,6 @@ function ScheduleCalendar({ today }: { today: string }) {
   const [year, month, day] = today.split('-').map(Number);
   const [view, setView] = useState({ year, month: month - 1 });
   const [selected, setSelected] = useState(today);
-  const [formVisible, setFormVisible] = useState(false);
-  const [message, setMessage] = useState('');
-  const previewRef = useRef<HTMLHeadingElement>(null);
   const selectedDate = new Date(`${selected}T00:00:00Z`);
   const weekday = selectedDate.getUTCDay();
   const selectedDay = getScheduleDay(selected, today);
@@ -51,8 +48,6 @@ function ScheduleCalendar({ today }: { today: string }) {
 
   function chooseDate(value: string) {
     setSelected(value);
-    setMessage('');
-    setFormVisible(false);
   }
 
   return <>
@@ -67,7 +62,7 @@ function ScheduleCalendar({ today }: { today: string }) {
           </div>
         </div>
         <div className="weekdays" aria-hidden="true">{weekdays.map(w => <span key={w}>{w}</span>)}</div>
-        <div className="calendar-days" role="group" aria-label={`${view.year}년 ${view.month + 1}월 교육 일정 예시`}>
+        <div className="calendar-days" role="group" aria-label={`${view.year}년 ${view.month + 1}월 교육 운영 안내`}>
           {Array.from({ length: start }, (_, i) => <span key={`empty-${i}`} className="empty-day" />)}
           {Array.from({ length: days }, (_, i) => {
             const number = i + 1;
@@ -84,30 +79,21 @@ function ScheduleCalendar({ today }: { today: string }) {
         <p className="calendar-footnote"><span className="legend-dot" />일요일·법정공휴일은 휴무입니다.<span>운영 여부·임시공휴일은 전화 확인</span></p>
       </div>
       <aside className="date-detail" aria-labelledby="selected-date">
-        <span className="eyebrow">선택한 교육일</span>
+        <span className="eyebrow">선택한 날짜의 운영 안내</span>
         <h3 id="selected-date" aria-live="polite">{selectedLabel}</h3>
         <span className={`status-tag ${closed ? 'muted-tag' : ''}`}>{selectedDay.label}</span>
         <p className="schedule-day-note">{selectedDay.reason}</p>
         <dl className="date-specs">
           <div><dt>교육 과정</dt><dd>건설업 기초안전보건교육</dd></div>
-          <div><dt>교육 시간</dt><dd>{closed ? '신청 불가' : time}</dd></div>
+          <div><dt>교육 시간</dt><dd>{selected < today ? '지난 일정' : selectedDay.label === '확인 필요' ? '전화 확인' : closed ? '휴무' : time}</dd></div>
           {!closed ? <div><dt>접수 안내</dt><dd>{weekday === 6 ? '사전 예약 필수' : '12:40까지 접수'}</dd></div> : null}
           <div><dt>교육비</dt><dd>80,000원</dd></div>
           <div><dt>준비물</dt><dd>신분증</dd></div>
         </dl>
-        <button type="button" className="button button-dark full-width" disabled={closed} onClick={() => { setFormVisible(true); setMessage(''); setTimeout(() => previewRef.current?.focus(), 0); }}>{closed ? '선택한 날짜는 예시를 제공하지 않습니다' : '예약 절차 예시 보기'}{closed ? null : <span aria-hidden="true">↗</span>}</button>
-        <p className="demo-caption">요일별 운영 기준 안내이며 실제 개강·잔여석을 보장하지 않습니다. 온라인 예약·결제는 제공하지 않습니다.</p>
-        <a className="text-link" href="tel:0553890302">전화 문의 055-389-0302 <span aria-hidden="true">↗</span></a>
+        <a className="button button-dark full-width" href={company.phoneHref}>{closed && selectedDay.label !== '확인 필요' ? '다른 교육일 전화 문의' : weekday === 6 ? '토요일 교육 전화 예약' : '교육일·접수 가능 여부 전화 확인'}<span aria-hidden="true">↗</span></a>
+        <p className="schedule-contact-number">접수 문의 <a href={company.phoneHref}>{company.phone}</a></p>
+        <p className="schedule-caption">달력은 요일별 운영 기준을 안내합니다. 날짜 선택만으로 접수되지 않으며, 실제 개강·휴강 및 접수 가능 인원은 전화로 확인해 주세요.</p>
       </aside>
     </div>
-    {formVisible ? <div className="application-panel" id="application">
-      <div className="application-heading"><div><span className="eyebrow">APPLICATION PREVIEW</span><h3 ref={previewRef} tabIndex={-1}>교육 예약 절차 예시</h3><p>{selectedLabel} · {time}</p></div><button type="button" className="text-link" onClick={() => { setFormVisible(false); setMessage(''); }}>닫기</button></div>
-      <p className="form-notice">현재는 예약 접수 전입니다. 개인정보를 입력하는 기능 없이 가상의 정보로 절차만 안내합니다.</p>
-      <div>
-        <dl className="demo-applicant"><div><dt>예약자 예시</dt><dd>교육생 예시</dd></div><div><dt>연락처 예시</dt><dd>010-0000-0000</dd></div></dl>
-        <div className="form-bottom"><p><Link href="/privacy">개인정보 처리 안내</Link> · 실제 예약은 전화 문의를 이용해 주세요.</p><button className="button button-dark" type="button" onClick={() => setMessage('예시 확인이 끝났습니다. 예약이 접수되거나 결제가 진행된 것은 아닙니다. 교육 문의는 055-389-0302로 연락해 주세요.')}>예시 확인하기 <span aria-hidden="true">→</span></button></div>
-        <p className="form-result" role="status">{message}</p>
-      </div>
-    </div> : null}
   </>;
 }

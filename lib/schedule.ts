@@ -48,5 +48,5 @@ export function getScheduleDay(date: string, today: string) {
   if (date < '2026-11-26' || date > '2027-12-31') {
     return { label: '확인 필요', closed: true, reason: '공휴일과 운영 일정 확인이 필요한 날짜입니다. 전화로 문의해 주세요.' };
   }
-  return { label: weekday === 6 ? '예약제' : '평일 예시', closed: false, reason: weekday === 6 ? '토요일 사전 예약제' : '평일 접수 12:40까지' };
+  return { label: weekday === 6 ? '예약제' : '평일 교육', closed: false, reason: weekday === 6 ? '토요일 사전 예약제' : '평일 접수 12:40까지' };
 }

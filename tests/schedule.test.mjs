@@ -13,7 +13,7 @@ test('Seoul date crosses midnight independently of UTC, including month/year/lea
   ]) assert.equal(getKoreanDateKey(new Date(instant)), expected);
 });
 
-test('past dates, Sundays and public holidays cannot offer a schedule preview', () => {
+test('past dates, Sundays and public holidays are not shown as teaching days', () => {
   const today = '2026-11-26';
   assert.equal(getScheduleDay('2026-11-03', today).label, '지난 날짜');
   assert.equal(getScheduleDay('2026-11-25', today).closed, true);
