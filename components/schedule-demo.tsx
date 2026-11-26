@@ -1,12 +1,34 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
+import { getKoreanDateKey, getScheduleDay } from '../lib/schedule';
 
 const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
 const dateKey = (year: number, month: number, day: number) => `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 
-export function ScheduleDemo({ today }: { today: string }) {
+function subscribeToDate(onChange: () => void) {
+  const timer = window.setInterval(onChange, 1000);
+  window.addEventListener('focus', onChange);
+  document.addEventListener('visibilitychange', onChange);
+  return () => {
+    window.clearInterval(timer);
+    window.removeEventListener('focus', onChange);
+    document.removeEventListener('visibilitychange', onChange);
+  };
+}
+
+const getServerDate = () => null;
+
+export function ScheduleDemo() {
+  // Static HTML must not freeze "today" at deployment time. The server and the
+  // first hydration render share a placeholder; the browser then reads Seoul's date.
+  const today = useSyncExternalStore(subscribeToDate, getKoreanDateKey, getServerDate);
+  if (!today) return <div className="calendar-loading" role="status">한국 시간 기준 교육 달력을 불러오는 중입니다.</div>;
+  return <ScheduleCalendar key={today} today={today} />;
+}
+
+function ScheduleCalendar({ today }: { today: string }) {
   const [year, month, day] = today.split('-').map(Number);
   const [view, setView] = useState({ year, month: month - 1 });
   const [selected, setSelected] = useState(today);
@@ -15,7 +37,8 @@ export function ScheduleDemo({ today }: { today: string }) {
   const previewRef = useRef<HTMLHeadingElement>(null);
   const selectedDate = new Date(`${selected}T00:00:00Z`);
   const weekday = selectedDate.getUTCDay();
-  const closed = weekday === 0 || selected < today;
+  const selectedDay = getScheduleDay(selected, today);
+  const closed = selectedDay.closed;
   const time = weekday === 6 ? '09:00–13:00' : '13:00–17:00';
   const days = new Date(view.year, view.month + 1, 0).getDate();
   const start = new Date(view.year, view.month, 1).getDay();
@@ -49,29 +72,31 @@ export function ScheduleDemo({ today }: { today: string }) {
           {Array.from({ length: days }, (_, i) => {
             const number = i + 1;
             const key = dateKey(view.year, view.month, number);
-            const w = new Date(view.year, view.month, number).getDay();
-            const unavailable = w === 0 || key < today;
-            const status = key < today ? '지난 날짜' : w === 0 ? '휴무 예시' : w === 6 ? '토요일 예시' : '평일 예시';
+            const scheduleDay = getScheduleDay(key, today);
+            const unavailable = scheduleDay.closed;
+            const status = scheduleDay.label;
             return <button type="button" key={key} className={`calendar-day ${selected === key ? 'selected' : ''} ${unavailable ? 'unavailable' : ''}`} aria-pressed={selected === key} aria-label={`${view.month + 1}월 ${number}일 ${status}`} onClick={() => chooseDate(key)}>
               <span className="day-number">{number}{key === today ? <i className="today-dot" aria-label="오늘" /> : null}</span>
               <span className="day-status">{status}</span>
             </button>;
           })}
         </div>
-        <p className="calendar-footnote"><span className="legend-dot" />요일별 시간 배치를 보여주는 예시입니다.<span>실제 운영 여부는 전화 확인</span></p>
+        <p className="calendar-footnote"><span className="legend-dot" />일요일·법정공휴일은 휴무입니다.<span>운영 여부·임시공휴일은 전화 확인</span></p>
       </div>
       <aside className="date-detail" aria-labelledby="selected-date">
         <span className="eyebrow">선택한 교육일</span>
         <h3 id="selected-date" aria-live="polite">{selectedLabel}</h3>
-        <span className={`status-tag ${closed ? 'muted-tag' : ''}`}>{closed ? (selected < today ? '지난 날짜' : '휴무') : '일정 예시'}</span>
+        <span className={`status-tag ${closed ? 'muted-tag' : ''}`}>{selectedDay.label}</span>
+        <p className="schedule-day-note">{selectedDay.reason}</p>
         <dl className="date-specs">
           <div><dt>교육 과정</dt><dd>건설업 기초안전보건교육</dd></div>
           <div><dt>교육 시간</dt><dd>{closed ? '신청 불가' : time}</dd></div>
+          {!closed ? <div><dt>접수 안내</dt><dd>{weekday === 6 ? '사전 예약 필수' : '12:40까지 접수'}</dd></div> : null}
           <div><dt>교육비</dt><dd>80,000원</dd></div>
           <div><dt>준비물</dt><dd>신분증</dd></div>
         </dl>
         <button type="button" className="button button-dark full-width" disabled={closed} onClick={() => { setFormVisible(true); setMessage(''); setTimeout(() => previewRef.current?.focus(), 0); }}>{closed ? '선택한 날짜는 예시를 제공하지 않습니다' : '예약 절차 예시 보기'}{closed ? null : <span aria-hidden="true">↗</span>}</button>
-        <p className="demo-caption">실제 운영 일정·공휴일·잔여석과 연결되지 않은 예시입니다. 온라인 예약·결제는 제공하지 않습니다.</p>
+        <p className="demo-caption">요일별 운영 기준 안내이며 실제 개강·잔여석을 보장하지 않습니다. 온라인 예약·결제는 제공하지 않습니다.</p>
         <a className="text-link" href="tel:0553890302">전화 문의 055-389-0302 <span aria-hidden="true">↗</span></a>
       </aside>
     </div>

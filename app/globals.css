@@ -439,6 +439,9 @@ body { background: var(--paper); }
   .mobile-schedule span { font-size: 19px; }
 }
 
+.calendar-loading { min-height: 520px; display: grid; place-items: center; padding: 24px; color: var(--muted); text-align: center; }
+.schedule-day-note { margin-top: 12px; color: var(--ink); font-size: 13px; line-height: 1.8; }
+
 /* Main hero image carousel. The grid child must not grow to Swiper's track width. */
 .hero-grid > * { min-width: 0; }
 .hero-slider { width: 100%; min-width: 0; align-self: center; overflow: hidden; border: 1px solid #dbe0d1; border-radius: 4px; background: #fffdf8; }

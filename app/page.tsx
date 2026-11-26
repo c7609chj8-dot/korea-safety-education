@@ -16,26 +16,26 @@ const kakaoMap = `https://map.kakao.com/link/search/${encodeURIComponent(company
 const embeddedMap = `https://www.google.com/maps?q=${encodeURIComponent(company.address)}&hl=ko&z=17&output=embed`;
 
 const instructors = [
-  { name: '최현주', position: '대표이사', field: '안전총괄', initial: '최' },
-  { name: '안정현', position: '대표이사', field: '보건', initial: '안' },
-  { name: '신윤철', position: '원장', field: '안전', initial: '신' },
+  { name: '최현주', position: '대표이사', field: '안전교육총괄', initial: '최' },
+  { name: '안정현', position: '대표이사', field: '보건교육', initial: '안' },
+  { name: '신윤철', position: '원장', field: '안전교육', initial: '신' },
 ];
 
 const notices = [
   { label: '공지', title: '교육 신청 전 꼭 확인해 주세요', text: '교육 당일 본인 확인을 위해 신분증을 반드시 지참해 주세요.' },
-  { label: '접수', title: '당일 접수 가능 여부', text: '교육 운영 여부와 접수 가능 인원은 방문 전 전화로 확인해 주세요.' },
+  { label: '접수', title: '평일 12시 40분까지 접수', text: '신분증을 지참해 평일 12:40까지 접수해 주세요. 토요일은 예약제이며 일요일·법정공휴일은 휴무입니다.' },
   { label: '주차', title: '교육생 주차 안내', text: '교육생 주차가 가능합니다. 이용 위치는 방문 전 문의해 주세요.' },
 ];
 
 const preparations = [
   { number: '01', title: '신분증 필수', text: '본인 확인을 위해 반드시 지참해 주세요.' },
-  { number: '02', title: '20분 전 도착', text: '원활한 접수를 위해 교육 시작 전에 도착해 주세요.' },
+  { number: '02', title: '평일 12:40까지 접수', text: '토요일은 사전 예약 후 안내받은 시간에 방문해 주세요.' },
   { number: '03', title: '교육비 확인', text: '센터 안내금액은 80,000원이며 최종 금액은 접수 전에 확인해 주세요.' },
 ];
 
 const faqs = [
   ['교육은 몇 시간인가요?', '건설업 기초안전보건교육은 4시간 과정으로 안내합니다. 평일은 13:00~17:00, 토요일은 사전 예약제로 09:00~13:00에 운영합니다.'],
-  ['당일 접수 가능한가요?', '당일 현장 접수 가능 여부와 접수 인원은 교육 전에 055-389-0302로 확인해 주세요. 토요일은 사전 예약이 필요합니다.'],
+  ['당일 접수 가능한가요?', '평일 접수는 12:40까지입니다. 방문 전 접수 가능 인원을 055-389-0302로 확인해 주세요. 토요일은 사전 예약제이며 일요일·법정공휴일은 휴무입니다.'],
   ['신분증이 꼭 필요한가요?', '본인 확인을 위해 신분증을 반드시 지참해 주세요. 인정 가능한 신분증의 종류는 접수 전에 전화로 확인할 수 있습니다.'],
   ['교육비는 얼마인가요?', '현재 센터 안내금액은 80,000원입니다. 교육비 부담 원칙과 최종 납부 금액은 교육 대상과 지원 조건에 따라 달라질 수 있으므로 접수 전에 확인해 주세요.'],
   ['토요일에도 교육하나요?', '토요일 교육은 09:00~13:00 사전 예약제로 안내합니다. 운영 여부는 매주 달라질 수 있으니 미리 전화로 확인해 주세요.'],
@@ -83,7 +83,7 @@ export default async function Home() {
             <p className="eyebrow"><span className="tiny-line" /> 양산 · 부산 · 경남 교육생을 위한 법정 안전교육</p>
             <h1>건설업 기초<br /><em>안전보건교육</em></h1>
             <p className="hero-tagline">안전한 현장의 첫걸음, 교육에서 시작합니다.</p>
-            <p className="hero-description">평일 13:00~17:00 · 토요일 09:00~13:00 예약제<br />신분증 지참 · 교육생 주차 가능 · 현장 접수는 전화 확인</p>
+            <p className="hero-description">평일 13:00~17:00 · 접수 12:40까지<br />토요일 09:00~13:00 예약제 · 일요일·법정공휴일 휴무<br />신분증 지참 · 교육생 주차 가능</p>
             <div className="hero-actions">
               <a href="#schedule" className="button button-dark">교육 일정 확인 <span aria-hidden="true">↗</span></a>
               <a href={`tel:${company.phone.replaceAll('-', '')}`} className="hero-phone">전화 문의 <span aria-hidden="true">→</span></a>
@@ -136,8 +136,8 @@ export default async function Home() {
 
       <section className="schedule-section section" id="schedule"><div className="container">
         <div className="section-heading"><div><p className="eyebrow">SCHEDULE</p><h2>교육 일정</h2></div><div className="schedule-heading-note"><span className="outline-tag">일정 미리보기</span><p className="section-description">방문 전 일정을 확인하세요.<br />실제 운영 여부는 전화 확인이 필요합니다.</p></div></div>
-        <div className="schedule-summary" aria-label="교육 운영 안내"><div><span>평일 교육</span><strong>월요일~금요일 13:00~17:00</strong></div><div><span>토요일 예약제</span><strong>토요일 09:00~13:00</strong></div><div><span>입실 안내</span><strong>교육 시작 20분 전 도착</strong></div></div>
-        <ScheduleDemo today={today} />
+        <div className="schedule-summary" aria-label="교육 운영 안내"><div><span>평일 교육 · 접수 12:40까지</span><strong>월요일~금요일 13:00~17:00</strong></div><div><span>토요일 예약제</span><strong>토요일 09:00~13:00</strong></div><div><span>휴무 안내</span><strong>일요일·법정공휴일 휴무</strong></div></div>
+        <ScheduleDemo />
       </div></section>
 
       <section className="section container facility-section" id="facility">
