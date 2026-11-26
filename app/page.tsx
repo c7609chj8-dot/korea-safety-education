@@ -16,9 +16,9 @@ const kakaoMap = `https://map.kakao.com/link/search/${encodeURIComponent(company
 const embeddedMap = `https://www.google.com/maps?q=${encodeURIComponent(company.address)}&hl=ko&z=17&output=embed`;
 
 const instructors = [
-  { name: '최현주', position: '대표이사', field: '안전교육총괄', initial: '최' },
-  { name: '안정현', position: '대표이사', field: '보건교육', initial: '안' },
-  { name: '신윤철', position: '원장', field: '안전교육', initial: '신' },
+  { name: '최현주', position: '대표이사', field: '안전교육총괄', initial: '최', description: '한국안전교육의 안전교육 운영을 총괄합니다.' },
+  { name: '안정현', position: '교육 담당', field: '보건교육', initial: '안', description: '건설업 기초안전보건교육의 보건교육을 담당합니다.' },
+  { name: '신윤철', position: '교육 담당', field: '안전교육', initial: '신', description: '건설업 기초안전보건교육의 안전교육을 담당합니다.' },
 ];
 
 const notices = [
@@ -47,13 +47,13 @@ const faqs = [
 ];
 
 const gallery = [
-  { file: '04-safety-classroom.png', title: '안전교육 강의', text: '현장에 필요한 안전수칙을 이해하기 쉽게 설명합니다.' },
-  { file: '02-personal-protective-equipment.png', title: '보호구 점검 안내', text: '개인보호구의 기본과 착용 전 확인사항을 안내합니다.' },
-  { file: '03-fall-prevention.png', title: '추락 예방 교육', text: '주요 위험요인과 예방의 기본을 함께 살펴봅니다.' },
+  { file: 'classroom.jpg', width: 4000, height: 3000, title: '실제 교육 현장', text: '한국안전교육 강의실에서 진행하는 안전보건교육 모습입니다.', alt: '한국안전교육 강의실에서 강사와 교육생이 함께하는 교육 현장' },
+  { file: 'training-equipment.jpg', width: 4000, height: 3000, title: '교육장과 실습 교구', text: '안전모·안전대 등 보호구와 교육용 교구를 활용합니다.', alt: '한국안전교육 교육장의 보호구 전시 마네킹, 안전모와 실습 교구' },
+  { file: 'harness-practice.jpg', width: 1613, height: 907, title: '안전대 체험 실습', text: '강사의 안내와 함께 안전대 착용을 체험하는 모습입니다.', alt: '강사가 안내하는 가운데 교육생이 안전대를 착용해 체험하는 실습 장면' },
 ];
 
 const resources = [
-  { type: 'PDF · 안전교육 자료', title: '건설현장 주요 위험작업 안전자료', text: '안전보건공단의 건설현장 위험작업 교육자료를 확인하세요.', href: 'https://www.kosha.or.kr/' },
+  { type: '공식기관 홈페이지', title: '안전보건공단 자료 찾아보기', text: '안전보건공단 홈페이지에서 필요한 안전보건 교육자료를 찾아보세요.', href: 'https://www.kosha.or.kr/' },
 ];
 
 const relatedSites = [
@@ -123,12 +123,13 @@ export default async function Home() {
         <div className="container">
           <div className="section-heading">
             <div><p className="eyebrow">INSTRUCTORS</p><h2>강사소개</h2></div>
-            <p className="section-description">현장 경험과 전문성을 갖춘 강사진을 소개합니다.<br />세부 경력과 교육 가능 분야는 전화로 문의해 주세요.</p>
+            <p className="section-description">안전교육총괄·보건교육·안전교육 담당 강사진입니다.<br />교육 관련 문의는 대표전화로 안내합니다.</p>
           </div>
           <div className="instructor-grid">
             {instructors.map((instructor) => <article className="instructor-card" key={instructor.name}>
               <div className="instructor-avatar" aria-hidden="true">{instructor.initial}</div>
               <p>{instructor.position}</p><h3>{instructor.name}</h3><span>{instructor.field}</span>
+              <p className="instructor-description">{instructor.description}</p>
             </article>)}
           </div>
         </div>
@@ -146,14 +147,14 @@ export default async function Home() {
       </div></section>
 
       <section className="section container facility-section" id="facility">
-        <div className="section-heading"><div><p className="eyebrow">FACILITY</p><h2>교육사진</h2></div><p className="section-description">교육에서 다루는 핵심 안전 주제를 확인하세요.<br />방문 전 교육장과 주차 위치는 전화로 문의해 주세요.</p></div>
+        <div className="section-heading"><div><p className="eyebrow">OUR CLASSROOM</p><h2>교육 현장과 실습</h2></div><p className="section-description">한국안전교육의 실제 강의실과 교육 모습을 확인하세요.<br />교육장·주차 위치는 방문 전 전화로 문의해 주세요.</p></div>
         <div className="facility-grid">
-          {gallery.map((item, index) => <article className="facility-card" key={item.file}>
-            <div className="facility-image"><Image src={`/images/safety/${item.file}`} alt={`${item.title} 교육용 예시 이미지`} width={1536} height={1024} sizes="(max-width: 800px) 100vw, 33vw" priority={index === 0} /></div>
+          {gallery.map(item => <article className="facility-card" key={item.file}>
+            <div className="facility-image"><Image src={`/images/center/${item.file}`} alt={item.alt} width={item.width} height={item.height} sizes="(max-width: 800px) calc(100vw - 40px), (max-width: 1280px) 30vw, 370px" /></div>
             <div><h3>{item.title}</h3><p>{item.text}</p></div>
           </article>)}
         </div>
-        <p className="image-disclaimer">현재 사용한 이미지는 실제 교육장·강사 사진이 아닌 AI 제작 교육용 예시 이미지입니다.</p>
+        <p className="image-disclaimer">위 사진은 한국안전교육에서 제공한 실제 교육 현장 사진입니다. 촬영 당시 모습으로 현재 교육 구성은 달라질 수 있습니다.</p>
       </section>
 
       <section className="notice-section section"><div className="container">
