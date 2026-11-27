@@ -125,7 +125,18 @@ section[id]{scroll-margin-top:20px}
 .schedule-contact-number{font-size:14px;margin-top:14px}
 .schedule-contact-number a{color:var(--blue);font-weight:700;text-decoration:underline;text-underline-offset:4px}
 .schedule-caption{font-size:13px;color:var(--muted);line-height:1.9;margin-top:12px;word-break:keep-all}
-.calendar-loading{min-height:520px;display:grid;place-items:center;padding:24px;color:var(--muted);text-align:center}
+.schedule-grid>.calendar,.schedule-grid>.date-detail{min-height:640px}
+.calendar-loading{position:relative}
+.skeleton-bar{display:block;background:#e8edf5;border-radius:5px;height:16px}
+.skeleton-heading{height:34px;width:58%;margin-block:5px}
+.skeleton-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:20px;padding:14px 12px;border-block:1px solid var(--line)}
+.skeleton-weekdays .skeleton-bar{height:14px}
+.skeleton-day{display:block;width:18px;height:18px;background:#e8edf5;border-radius:4px}
+.skeleton-detail{height:30px;margin-top:25px}
+.calendar-loading-label{font-size:15px;color:var(--muted);margin-top:22px}
+.page-breadcrumb{display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin-bottom:24px}
+.page-breadcrumb a{display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;text-underline-offset:4px;color:var(--blue)}
+@media(max-width:800px){.schedule-grid>.calendar{min-height:600px}.schedule-grid>.date-detail{min-height:700px}.page-breadcrumb{margin-bottom:16px}.skeleton-weekdays{gap:12px}}
 .facility-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .facility-card{overflow:hidden;border:1px solid var(--line);border-radius:9px;background:#fff}
 .facility-image{aspect-ratio:4/3;overflow:hidden;background:var(--wash)}

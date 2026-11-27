@@ -1,20 +1,26 @@
 'use client';
 
 import { useState, useSyncExternalStore } from 'react';
-import { getKoreanDateKey, getScheduleDay } from '../lib/schedule';
+import { getKoreanDateKey, getScheduleDay, millisecondsUntilKoreanMidnight } from '../lib/schedule';
 import { company } from '../lib/company';
 
 const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
 const dateKey = (year: number, month: number, day: number) => `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 
 function subscribeToDate(onChange: () => void) {
-  const timer = window.setInterval(onChange, 1000);
-  window.addEventListener('focus', onChange);
-  document.addEventListener('visibilitychange', onChange);
+  let timer: number;
+  function refresh() {
+    window.clearTimeout(timer);
+    onChange();
+    timer = window.setTimeout(refresh, millisecondsUntilKoreanMidnight() + 50);
+  }
+  timer = window.setTimeout(refresh, millisecondsUntilKoreanMidnight() + 50);
+  window.addEventListener('focus', refresh);
+  document.addEventListener('visibilitychange', refresh);
   return () => {
-    window.clearInterval(timer);
-    window.removeEventListener('focus', onChange);
-    document.removeEventListener('visibilitychange', onChange);
+    window.clearTimeout(timer);
+    window.removeEventListener('focus', refresh);
+    document.removeEventListener('visibilitychange', refresh);
   };
 }
 
@@ -24,7 +30,11 @@ export function EducationSchedule() {
   // Static HTML must not freeze "today" at deployment time. The server and the
   // first hydration render share a placeholder; the browser then reads Seoul's date.
   const today = useSyncExternalStore(subscribeToDate, getKoreanDateKey, getServerDate);
-  if (!today) return <div className="calendar-loading" role="status">한국 시간 기준 교육 달력을 불러오는 중입니다.</div>;
+  if (!today) return <div className="schedule-grid calendar-loading" role="status">
+    <span className="sr-only">한국 시간 기준 교육 달력을 불러오는 중입니다.</span>
+    <div className="calendar" aria-hidden="true"><div className="calendar-top"><span className="skeleton-bar skeleton-heading" /></div><div className="skeleton-weekdays">{Array.from({ length: 7 }, (_, index) => <span key={index} className="skeleton-bar" />)}</div><div className="calendar-days">{Array.from({ length: 35 }, (_, index) => <div className="calendar-day" key={index}><span className="skeleton-day" /></div>)}</div></div>
+    <div className="date-detail" aria-hidden="true"><span className="skeleton-bar skeleton-heading" /><p className="calendar-loading-label">교육일정을 준비하고 있습니다.</p>{Array.from({ length: 6 }, (_, index) => <span className="skeleton-bar skeleton-detail" key={index} />)}</div>
+  </div>;
   return <ScheduleCalendar key={today} today={today} />;
 }
 

@@ -6,7 +6,10 @@ export const metadata: Metadata = {
   ...pageMetadata({ title: siteTitle, description: siteDescription, path: '/' }),
   metadataBase: new URL(siteUrl),
   applicationName: '한국안전교육',
-  verification: { google: process.env.GOOGLE_SITE_VERIFICATION?.trim() || undefined },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION?.trim() || undefined,
+    ...(process.env.NAVER_SITE_VERIFICATION?.trim() ? { other: { 'naver-site-verification': process.env.NAVER_SITE_VERIFICATION.trim() } } : {}),
+  },
   robots: { index: isPublicProduction, follow: isPublicProduction },
   referrer: 'no-referrer',
 };

@@ -66,6 +66,16 @@ npm start
 
 Search Console 소유권 확인과 사이트맵 제출은 [구글_검색등록_안내.md](./구글_검색등록_안내.md)를 따르세요. 확인값은 Google에서 발급받아야 하며 SEO 코드만으로 소유권 확인이나 색인 완료를 보장하지 않습니다.
 
+## 4일차 검색·로딩 개선
+
+- 홈·교육비 안내·자료실의 제목과 설명, canonical·공유 이미지를 확인했습니다. 교육안내·자료실에는 현재 위치와 WebPage/CollectionPage·BreadcrumbList 구조화 데이터를 추가했습니다. 기관 등록번호는 제공된 등록증에 근거해 표시합니다.
+- 사이트맵에는 공개 페이지 3개와 실제 교육사진·등록증 이미지 경로를 포함합니다. 운영의 관리자·API 응답, 미리보기의 모든 응답에는 HTTP `X-Robots-Tag: noindex, nofollow`를 적용합니다.
+- 네이버 소유확인 값은 `NAVER_SITE_VERIFICATION`, 구글은 `GOOGLE_SITE_VERIFICATION`에 발급된 content 값만 입력하고 운영으로 재배포합니다. 계정 소유확인·사이트맵 제출·실제 검색 색인은 별도 절차입니다. 임의의 인증값은 게시하지 않습니다.
+- 이미지 파생 크기는 최대 2048px로 제한하고 160px 썸네일 크기를 추가했습니다. 원본 사진과 공유 이미지는 유지합니다. 달력은 한국 자정과 화면 복귀 때 갱신하며 매초 확인을 제거했습니다. 초기 달력 자리도 예약해 모바일 화면 밀림을 줄입니다.
+- 속도 점수·검색 순위 상승이나 실제 사용자 Core Web Vitals 개선 수치는 측정 전 보장하지 않습니다.
+
+공식 참고: [Google 경로 구조화 데이터](https://developers.google.com/search/docs/appearance/structured-data/breadcrumb), [네이버 소유확인](https://searchadvisor.naver.com/guide/faq-start-register).
+
 
 ## 최종 점검 및 유지관리
 

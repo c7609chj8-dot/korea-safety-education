@@ -40,6 +40,11 @@ export function getKoreanDateKey(now = new Date()): string {
   return `${value('year')}-${value('month')}-${value('day')}`;
 }
 
+export function millisecondsUntilKoreanMidnight(now = new Date()): number {
+  const nextMidnight = Date.parse(`${getKoreanDateKey(now)}T00:00:00+09:00`) + 86_400_000;
+  return Math.max(1, nextMidnight - now.getTime());
+}
+
 export function getScheduleDay(date: string, today: string) {
   const weekday = new Date(`${date}T00:00:00Z`).getUTCDay();
   if (date < today) return { label: '지난 날짜', closed: true, reason: '지난 날짜입니다.' };

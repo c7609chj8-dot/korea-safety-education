@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { getKoreanDateKey, getScheduleDay } from '../lib/schedule.ts';
+import { getKoreanDateKey, getScheduleDay, millisecondsUntilKoreanMidnight } from '../lib/schedule.ts';
 
 test('Seoul date crosses midnight independently of UTC, including month/year/leap-day boundaries', () => {
   for (const [instant, expected] of [
@@ -24,6 +24,14 @@ test('past dates, Sundays and public holidays are not shown as teaching days', (
   assert.equal(getScheduleDay('2027-07-19', today).closed, true);
   assert.equal(getScheduleDay('2027-10-11', today).closed, true);
   assert.equal(getScheduleDay('2027-12-27', today).closed, true);
+});
+
+test('midnight refresh waits for Seoul midnight across month, year and leap-day boundaries', () => {
+  for (const instant of ['2026-11-26T14:59:59.500Z', '2026-11-30T14:59:59.500Z', '2026-12-31T14:59:59.500Z', '2028-02-29T14:59:59.500Z']) {
+    assert.equal(millisecondsUntilKoreanMidnight(new Date(instant)), 500);
+  }
+  assert.equal(millisecondsUntilKoreanMidnight(new Date('2026-11-26T15:00:00Z')), 86_400_000);
+  assert.equal(millisecondsUntilKoreanMidnight(new Date('2026-11-27T03:00:00Z')), 43_200_000);
 });
 
 test('weekday cutoff and Saturday reservation rules remain distinct', () => {

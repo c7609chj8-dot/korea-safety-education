@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { company } from './company';
+import { educationInfo } from './education-info';
 
 function resolveSiteUrl(value: string) {
   const url = new URL(value);
@@ -11,7 +12,7 @@ function resolveSiteUrl(value: string) {
 
 export const siteUrl = resolveSiteUrl(process.env.SITE_URL || 'https://korea-safety-education.vercel.app');
 export const isPublicProduction = process.env.VERCEL_ENV === 'production';
-export const siteTitle = '양산안전교육 · 건설업 기초안전보건교육 | 한국안전교육';
+export const siteTitle = '양산 건설업 기초안전보건교육 | 한국안전교육';
 export const siteDescription = '양산 한국안전교육의 건설업 기초안전보건교육 안내. 평일 13~17시, 토요일 오전 예약제, 교육비·신분증·오시는 길을 확인하세요. 경남 양산시 북정서길 22, 201호. 문의 055-389-0302.';
 export const shareImage = '/images/center/harness-practice.jpg';
 
@@ -45,6 +46,7 @@ export function organizationStructuredData() {
         telephone: `+82-${company.phone.replace(/^0/, '')}`,
         faxNumber: `+82-${company.fax.replace(/^0/, '')}`,
         taxID: company.businessNumber,
+        identifier: { '@type': 'PropertyValue', name: '건설업 기초안전·보건교육기관 등록번호', value: educationInfo.registrationNumber },
         image: new URL(shareImage, siteUrl).toString(),
         address: {
           '@type': 'PostalAddress',
@@ -55,6 +57,7 @@ export function organizationStructuredData() {
         },
       },
       { '@type': 'WebSite', '@id': `${siteUrl}/#website`, url: siteUrl, name: '한국안전교육', inLanguage: 'ko-KR', publisher: { '@id': `${siteUrl}/#organization` } },
+      { '@type': 'WebPage', '@id': `${siteUrl}/#webpage`, url: `${siteUrl}/`, name: siteTitle, description: siteDescription, inLanguage: 'ko-KR', isPartOf: { '@id': `${siteUrl}/#website` }, about: { '@id': `${siteUrl}/#organization` } },
     ],
   };
 }
