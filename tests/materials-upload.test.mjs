@@ -34,8 +34,15 @@ test('materials upload authorization and restrictions work with the patched depe
       process.env.MATERIALS_UPLOAD_PASSWORD = password;
     });
     await t.test('wrong directory, unsupported extension and excessive pathname are rejected', async () => {
-      for (const pathname of ['other/test.pdf', 'materials/test.html', `materials/${'a'.repeat(181)}.pdf`]) {
+      for (const pathname of ['other/test.pdf', 'materials/test.html', 'materials/../test.pdf', 'materials/cases/../../test.pdf', 'materials/other/test.pdf', `materials/${'a'.repeat(181)}.pdf`]) {
         assert.equal((await POST(tokenRequest(pathname))).status, 400);
+      }
+    });
+    await t.test('new categorized posts can issue authorized upload tokens', async () => {
+      for (const pathname of ['materials/cases/123-사고사례.pdf', 'materials/guides/123-교육안내.docx']) {
+        const response = await POST(tokenRequest(pathname));
+        assert.equal(response.status, 200);
+        assert.equal(getPayloadFromClientToken((await response.json()).clientToken).pathname, pathname);
       }
     });
     await t.test('authorized document tokens carry the file type and 10 MB limits', async () => {

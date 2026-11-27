@@ -7,7 +7,7 @@ const links = [
   ['교육시간·접수', '#schedule'],
   ['교육 현장', '#facility'],
   ['기관·강사 소개', '#about'],
-  ['자료실', '#resources'],
+  ['자료실', '/materials'],
   ['오시는 길', '#location'],
 ];
 

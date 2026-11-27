@@ -17,9 +17,10 @@ function isAuthorized(suppliedPassword: string | null) {
 }
 
 function hasAllowedPathname(pathname: string) {
-  return pathname.startsWith('materials/')
+  return /^materials\/(?:(?:cases|guides)\/)?[^/\\]+\.(pdf|doc|docx)$/i.test(pathname)
     && pathname.length <= 180
-    && /\.(pdf|doc|docx)$/i.test(pathname);
+    && !pathname.includes('..')
+    && !/[\x00-\x1f]/.test(pathname);
 }
 
 export async function POST(request: Request) {

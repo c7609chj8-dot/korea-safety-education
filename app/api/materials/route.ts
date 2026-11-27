@@ -1,17 +1,21 @@
 import { list } from '@vercel/blob';
+import { initialMaterials, materialFromBlob, type Material } from '../../../lib/materials';
 
 const materialsPrefix = 'materials/';
 
 export async function GET() {
   try {
-    const { blobs } = await list({ prefix: materialsPrefix, limit: 50 });
-    const items = blobs
-      .sort((left, right) => right.uploadedAt.getTime() - left.uploadedAt.getTime())
-      .map(({ downloadUrl, pathname, size, uploadedAt, url }) => ({ downloadUrl, pathname, size, uploadedAt, url }));
-
-    return Response.json({ items }, { headers: { 'Cache-Control': 'no-store' } });
+    const uploaded: Material[] = [];
+    let cursor: string | undefined;
+    do {
+      const page = await list({ prefix: materialsPrefix, limit: 1000, cursor });
+      uploaded.push(...page.blobs.map(materialFromBlob));
+      cursor = page.hasMore ? page.cursor : undefined;
+    } while (cursor);
+    const items = [...uploaded, ...initialMaterials].sort((left, right) => Date.parse(right.uploadedAt) - Date.parse(left.uploadedAt));
+    return Response.json({ items, uploadsAvailable: true }, { headers: { 'Cache-Control': 'no-store' } });
   } catch {
-    return Response.json({ error: '자료 목록을 불러올 수 없습니다.' }, { status: 503, headers: { 'Cache-Control': 'no-store' } });
+    return Response.json({ items: initialMaterials, uploadsAvailable: false }, { headers: { 'Cache-Control': 'no-store' } });
   }
 }
 
