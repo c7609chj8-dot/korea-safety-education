@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import QRCode from 'qrcode';
 import { Header } from '../components/header';
+import { HeroSlider } from '../components/hero-slider';
+import { galleryPhotos } from '../lib/education-photos';
 import { MaterialsLibrary } from '../components/materials-library';
 import { EducationSchedule } from '../components/education-schedule';
 import { ShareSite } from '../components/share-site';
@@ -31,12 +33,6 @@ const faqs = [
   ['교육에 늦게 도착하면 어떻게 되나요?', '교육 진행과 이수 확인에 영향을 줄 수 있습니다. 부득이하게 늦는 경우에는 가능한 빨리 센터로 연락해 안내를 받아 주세요.'],
   ['이수 확인은 언제 하나요?', '출석과 이수 확인 절차는 교육 당일 안내합니다. 이수증 발급 방식과 시점은 교육 전에 확인해 주세요.'],
   ['예약을 취소하려면 어떻게 하나요?', '현재 홈페이지에서는 온라인 예약·취소를 운영하지 않습니다. 일정 변경이나 취소 문의는 055-389-0302로 연락해 주세요.'],
-];
-
-const gallery = [
-  { file: 'classroom.jpg', width: 4000, height: 3000, title: '실제 교육 현장', text: '한국안전교육 강의실에서 진행하는 안전보건교육 모습입니다.', alt: '한국안전교육 강의실에서 강사와 교육생이 함께하는 교육 현장' },
-  { file: 'training-equipment.jpg', width: 4000, height: 3000, title: '교육장과 실습 교구', text: '안전모·안전대 등 보호구와 교육용 교구를 활용합니다.', alt: '한국안전교육 교육장의 보호구 전시 마네킹, 안전모와 실습 교구' },
-  { file: 'harness-practice.jpg', width: 1613, height: 907, title: '안전대 체험 실습', text: '강사의 안내와 함께 안전대 착용을 체험하는 모습입니다.', alt: '강사가 안내하는 가운데 교육생이 안전대를 착용해 체험하는 실습 장면' },
 ];
 
 const resources = [
@@ -78,10 +74,7 @@ export default async function Home() {
             </div>
             <p className="hero-contact">접수 문의 <a href={company.phoneHref}>{company.phone}</a><span>토요일 사전 예약 · 일요일·공휴일 휴무</span></p>
           </div>
-          <figure className="hero-photo">
-            <Image src="/images/center/harness-practice.jpg" alt="한국안전교육에서 강사가 안내하는 안전대 착용 체험 실습" width={1613} height={907} sizes="(max-width: 800px) calc(100vw - 40px), (max-width: 1280px) 48vw, 600px" preload />
-            <figcaption><span className="photo-label">OUR CLASSROOM</span><strong>직접 보고, 함께 배우는 안전</strong><span>한국안전교육 실제 교육 현장 · 안전대 체험 실습</span></figcaption>
-          </figure>
+          <HeroSlider />
         </div>
       </section>
 
@@ -110,8 +103,8 @@ export default async function Home() {
       <section className="section container facility-section" id="facility">
         <div className="section-heading"><div><p className="eyebrow">OUR CLASSROOM</p><h2>교육 현장과 실습</h2></div><p className="section-description">한국안전교육의 실제 강의실과<br />안전보건교육 모습을 확인하세요.</p></div>
         <div className="facility-grid">
-          {gallery.map(item => <article className="facility-card" key={item.file}>
-            <div className="facility-image"><Image src={`/images/center/${item.file}`} alt={item.alt} width={item.width} height={item.height} sizes="(max-width: 800px) calc(100vw - 40px), (max-width: 1280px) 30vw, 370px" /></div>
+          {galleryPhotos.map(item => <article className="facility-card" key={item.file}>
+            <div className="facility-image"><Image src={`/images/center/${item.file}`} alt={item.alt} width={item.width} height={item.height} style={{ objectPosition: item.position }} sizes="(max-width: 800px) calc(100vw - 40px), (max-width: 1280px) 30vw, 370px" /></div>
             <div><h3>{item.title}</h3><p>{item.text}</p></div>
           </article>)}
         </div>

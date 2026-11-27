@@ -286,3 +286,28 @@ details[open] .faq-plus:after{transform:rotate(0)}
 }
 @media(max-width:370px){.container{width:calc(100% - 32px)}.header-inner{gap:12px}.brand{gap:8px}.brand strong{font-size:16px}.menu-toggle{padding-inline:9px}.hero h1{font-size:34px}.hero-tagline{font-size:17px}.hero-description br{display:none}.hero-actions .button{font-size:14px;padding-inline:12px}.hero-contact a{font-size:16px}.hero-photo figcaption{left:18px;bottom:17px}.hero-photo figcaption strong{font-size:19px}.hero-photo figcaption>span:last-child{font-size:11px}.hero-operating{gap:8px;font-size:14px}.hero-operating strong{font-size:12px}.start-heading h2{font-size:21px}.start-card{padding-inline:20px}.calendar-controls{gap:4px}.calendar-top{gap:10px}.calendar-day{min-height:61px}.day-status{font-size:11px}.about-stats{grid-template-columns:1fr;gap:15px}.about-stats>div{display:flex;align-items:baseline;gap:15px}.about-stats dt{flex:0 0 65px}.about-stats dd{margin:0;font-size:14px}.share-panel{grid-template-columns:1fr}.share-actions{grid-column:auto;grid-template-columns:1fr}.related-grid{grid-template-columns:1fr}.related-grid>a{border-left:0}.related-grid>a:nth-last-child(-n+2){border-bottom:1px solid var(--line)}.related-grid>a:last-child{border-bottom:0}.mobile-contact strong{font-size:14px}.mobile-schedule{font-size:14px;gap:6px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+/* Actual classroom photography carousel. */
+.hero-slider:after{z-index:1;inset:30% 0 0;pointer-events:none}
+.hero-swiper{position:absolute!important;inset:0;width:100%;height:100%;z-index:0!important}
+.hero-swiper .swiper-wrapper,.hero-swiper .swiper-slide{height:100%}
+.hero-swiper .swiper-slide>img{display:block;width:100%;height:100%;object-fit:cover}
+.slider-counter{position:absolute;z-index:2;top:22px;left:26px;padding:6px 12px;border:1px solid #ffffff50;border-radius:5px;background:#172d4ad9;color:#fff;font-size:14px;font-weight:700;letter-spacing:.07em}
+.slider-counter>span{color:#d3dce9;font-weight:400}
+.slider-caption{position:absolute;z-index:2;left:28px;right:28px;bottom:88px;pointer-events:none}
+.slider-caption .photo-label{color:#b4e8e1;font-size:12px;letter-spacing:.04em;font-weight:700}
+.slider-caption h2{color:#fff;font-size:27px;line-height:1.5;margin-top:6px;letter-spacing:-.04em}
+.slider-caption p{color:#edf2f8;font-size:14px;line-height:1.8;margin-top:7px;word-break:keep-all}
+.slider-controls{position:absolute;z-index:2;bottom:20px;left:26px;right:26px;display:flex;justify-content:space-between;align-items:center;gap:8px;padding-top:12px;border-top:1px solid #ffffff40}
+.slider-pagination{display:flex;align-items:center}
+.slider-pagination button{display:grid;place-items:center;width:23px;min-height:44px;border:0;background:transparent;padding:3px}
+.slider-pagination button>span{display:block;width:6px;height:6px;background:#ffffff80;border-radius:9px}
+.slider-pagination button[aria-current=true]>span{width:17px;background:#fff}
+.slider-navigation{display:flex;gap:5px}
+.slider-navigation button{display:grid;place-items:center;width:44px;height:44px;border:1px solid #ffffff60;background:#172d4acc;color:#fff;border-radius:5px;font-size:20px}
+.slider-navigation button:hover{background:#2455b8}
+.slider-navigation button:disabled{opacity:.65}
+.pause-symbol{width:9px;height:12px;border-inline:3px solid currentColor}
+.play-symbol{width:0;height:0;border-block:6px solid transparent;border-left:9px solid currentColor;margin-left:2px}
+.hero-slider button:focus-visible{outline-color:#b4e8e1;outline-offset:2px}
+@media(max-width:800px){.hero-photo.hero-slider{aspect-ratio:1.1}.slider-counter{top:18px;left:20px;font-size:13px}.slider-caption{left:21px;right:21px;bottom:91px}.slider-caption h2{font-size:23px}.slider-caption p{font-size:13px}.slider-controls{left:20px;right:20px;bottom:17px}.slider-pagination button{width:22px}}
+@media(max-width:370px){.hero-photo.hero-slider{aspect-ratio:.94}.slider-caption{left:17px;right:17px;bottom:88px}.slider-caption h2{font-size:22px}.slider-caption p{font-size:13px}.slider-caption .photo-label{font-size:11px}.slider-controls{left:14px;right:14px;gap:4px}.slider-navigation{gap:3px}.slider-pagination button{width:20px}.slider-counter{top:15px;left:17px}}
