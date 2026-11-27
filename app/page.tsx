@@ -8,6 +8,8 @@ import { MaterialsLibrary } from '../components/materials-library';
 import { EducationSchedule } from '../components/education-schedule';
 import { ShareSite } from '../components/share-site';
 import { company } from '../lib/company';
+import { educationInfo } from '../lib/education-info';
+import { RegistrationEvidence } from '../components/registration-evidence';
 import { isPublicProduction, organizationStructuredData, pageMetadata, siteDescription, siteTitle, siteUrl } from '../lib/seo';
 
 export const metadata = pageMetadata({ title: siteTitle, description: siteDescription, path: '/' });
@@ -28,7 +30,8 @@ const faqs = [
   ['신분증이 꼭 필요한가요?', '본인 확인을 위해 신분증을 반드시 지참해 주세요. 인정 가능한 신분증의 종류는 접수 전에 전화로 확인할 수 있습니다.'],
   ['교육비는 얼마인가요?', '현재 센터 안내금액은 80,000원입니다. 교육비 부담 원칙과 최종 납부 금액은 교육 대상과 지원 조건에 따라 달라질 수 있으므로 접수 전에 확인해 주세요.'],
   ['토요일에도 교육하나요?', '토요일 교육은 09:00~13:00 사전 예약제로 안내합니다. 운영 여부는 매주 달라질 수 있으니 미리 전화로 확인해 주세요.'],
-  ['주차 가능한가요?', '교육생 주차가 가능합니다. 주차 위치와 이용 방법은 방문 전에 센터로 문의해 주세요.'],
+  ['무료교육 대상은 누구인가요?', `${educationInfo.freeTargets.join('·')} 대상 선착순 안내입니다. ${educationInfo.portalNotice} 방문 전에 지원 가능 여부와 증빙서류를 전화로 확인해 주세요.`],
+  ['주차 가능한가요?', `${educationInfo.parking}을 이용하실 수 있습니다.`],
   ['외국인도 교육을 받을 수 있나요?', '교육 가능 여부, 필요한 서류와 지원 가능한 언어는 방문 전에 전화로 확인해 주세요.'],
   ['교육에 늦게 도착하면 어떻게 되나요?', '교육 진행과 이수 확인에 영향을 줄 수 있습니다. 부득이하게 늦는 경우에는 가능한 빨리 센터로 연락해 안내를 받아 주세요.'],
   ['이수 확인은 언제 하나요?', '출석과 이수 확인 절차는 교육 당일 안내합니다. 이수증 발급 방식과 시점은 교육 전에 확인해 주세요.'],
@@ -83,8 +86,8 @@ export default async function Home() {
           <div className="start-heading"><p className="eyebrow">방문 전, 먼저 확인하세요</p><h2 id="start-title">교육 준비, 세 가지만 확인하세요.</h2></div>
           <div className="start-grid">
             <article className="start-card"><span className="card-number">01 / SCHEDULE</span><h3>교육시간</h3><strong className="card-value">평일 13:00–17:00</strong><p>평일 접수는 12:40까지<br />토요일 09:00–13:00 사전 예약제</p><a href="#schedule">교육일·접수 안내 <span aria-hidden="true">↗</span></a></article>
-            <article className="start-card"><span className="card-number">02 / PREPARATION</span><h3>준비물과 교육비</h3><strong className="card-value">신분증을 챙겨주세요.</strong><p>센터 안내 교육비 80,000원<br />비용 부담·지원 조건은 접수 전 확인</p><Link href="/education-guide">교육 대상·비용 안내 <span aria-hidden="true">↗</span></Link></article>
-            <article className="start-card"><span className="card-number">03 / LOCATION</span><h3>오시는 길</h3><strong className="card-value">양산시 북정서길 22</strong><p>201호 · 새롬성원네오파트 상가<br />교육생 주차 가능 · 위치는 전화 문의</p><a href="#location">지도·주차 안내 <span aria-hidden="true">↗</span></a></article>
+            <article className="start-card"><span className="card-number">02 / PREPARATION</span><h3>준비물과 교육비</h3><strong className="card-value">신분증 필수 지참</strong><p>센터 안내 교육비 {educationInfo.fee}<br />무료교육 대상·지원 가능 여부 사전 확인</p><a href="#free-education">무료교육·준비물 안내 <span aria-hidden="true">↗</span></a></article>
+            <article className="start-card"><span className="card-number">03 / LOCATION</span><h3>오시는 길</h3><strong className="card-value">양산시 북정서길 22</strong><p>201호 · 새롬성원네오파트 상가<br />{educationInfo.parking}</p><a href="#location">지도·주차 안내 <span aria-hidden="true">↗</span></a></article>
           </div>
         </div>
       </section>
@@ -98,6 +101,13 @@ export default async function Home() {
           <li><span>03</span><div><h3>현장에서 접수 안내</h3><p>본인 확인과 교육비 등 접수 절차를 안내받으세요. 홈페이지에서는 온라인 신청·결제를 받지 않습니다.</p></div></li>
         </ol>
         <EducationSchedule />
+        <article className="free-education-panel" id="free-education" aria-labelledby="free-education-title">
+          <div><p className="eyebrow">BEFORE YOUR VISIT</p><h3 id="free-education-title">무료교육 대상·선착순 안내</h3><p>{educationInfo.freeNotice}</p></div>
+          <ul className="free-targets" aria-label="무료교육 지원 대상">{educationInfo.freeTargets.map(target => <li key={target}>{target}</li>)}</ul>
+          <p className="free-status">{educationInfo.portalNotice}</p>
+          <div className="free-preparation"><p><strong>준비물</strong> 신분증 필수 · 지원 대상 증빙서류는 접수 전 확인</p><p><strong>센터 안내 교육비</strong> {educationInfo.fee} · 비용 부담·지원 조건에 따라 최종 금액 확인</p></div>
+          <div className="free-links"><a className="text-link" href={company.phoneHref}>지원 가능 여부 문의 {company.phone} <span aria-hidden="true">↗</span></a><Link className="text-link" href="/education-guide">교육 대상·비용 자세히 보기 <span aria-hidden="true">↗</span></Link></div>
+        </article>
       </div></section>
 
       <section className="section container facility-section" id="facility">
@@ -124,6 +134,7 @@ export default async function Home() {
             <div><dt>실무형</dt><dd>현장 사례 교육</dd></div>
           </dl>
         </div>
+        <RegistrationEvidence />
         <div className="education-legal-note">
           <div><strong>교육 대상과 비용 부담을 확인하세요.</strong><p>건설 일용근로자를 채용하는 사업주의 교육 의무와 기존 이수자의 예외가 적용될 수 있습니다. 교육비 부담과 지원 여부는 접수 전에 확인해 주세요.</p></div>
           <Link href="/education-guide" className="text-link">교육 대상·비용 안내 <span aria-hidden="true">↗</span></Link>
@@ -159,7 +170,7 @@ export default async function Home() {
       </div></section>
 
       <section className="location-section" id="location"><div className="container location-grid">
-        <div><p className="eyebrow">LOCATION</p><h2>오시는 길</h2><h3 className="location-name">한국안전교육</h3><p className="location-address">{company.address}</p><dl className="location-info"><div><dt>전화</dt><dd><a href={company.phoneHref}>{company.phone}</a></dd></div><div><dt>팩스</dt><dd>{company.fax}</dd></div><div><dt>주차</dt><dd>교육생 주차 가능</dd></div></dl><div className="map-links"><a className="button button-dark" href={naverMap} target="_blank" rel="noopener noreferrer">네이버지도 길찾기 <span aria-hidden="true">↗</span></a><a className="button button-outline" href={kakaoMap} target="_blank" rel="noopener noreferrer">카카오맵 <span aria-hidden="true">↗</span></a></div></div>
+        <div><p className="eyebrow">LOCATION</p><h2>오시는 길</h2><h3 className="location-name">한국안전교육</h3><p className="location-address">{company.address}</p><dl className="location-info"><div><dt>전화</dt><dd><a href={company.phoneHref}>{company.phone}</a></dd></div><div><dt>팩스</dt><dd>{company.fax}</dd></div><div><dt>주차</dt><dd>{educationInfo.parking}</dd></div></dl><div className="map-links"><a className="button button-dark" href={naverMap} target="_blank" rel="noopener noreferrer">네이버지도 길찾기 <span aria-hidden="true">↗</span></a><a className="button button-outline" href={kakaoMap} target="_blank" rel="noopener noreferrer">카카오맵 <span aria-hidden="true">↗</span></a></div></div>
         <div className="location-map-card"><div className="location-map-top"><span>한국안전교육</span><span>YANGSAN</span></div><iframe className="location-map-frame" title="한국안전교육 위치 지도" src={embeddedMap} loading="lazy" referrerPolicy="no-referrer-when-downgrade" /><div className="location-map-caption"><strong>경남 양산시 북정서길 22</strong><span>201호 · 2층</span></div></div>
       </div></section>
 
@@ -169,6 +180,7 @@ export default async function Home() {
     </main>
     <footer className="footer"><div className="container"><div className="footer-top"><a className="brand" href="#top"><span className="brand-mark" aria-hidden="true">K<span>.</span></span><span><strong>한국안전교육</strong><small>KOREA SAFETY EDUCATION</small></span></a><a href="#top" className="back-top">맨 위로 <span aria-hidden="true">↑</span></a></div>
       <section className="footer-company" id="business-info" aria-label="사업자 정보"><h2>{company.legalName}</h2><dl className="footer-business-info"><div><dt>공동대표</dt><dd>{company.representatives}</dd></div><div><dt>사업자등록번호</dt><dd>{company.businessNumber}</dd></div><div className="business-address"><dt>사업장 소재지</dt><dd>{company.address}</dd></div><div><dt>전화</dt><dd><a href={company.phoneHref}>{company.phone}</a></dd></div><div><dt>팩스</dt><dd>{company.fax}</dd></div></dl></section>
+      <p className="footer-registration">건설업 기초안전·보건교육기관 등록번호 {educationInfo.registrationNumber} · <a href={educationInfo.registrationImage} target="_blank" rel="noopener noreferrer">등록증 보기</a></p>
       <nav className="footer-policy-links" aria-label="개인정보 및 이용 안내"><Link href="/privacy">개인정보 처리 안내</Link><Link href="/terms">홈페이지 이용안내</Link><Link href="/education-guide">교육 대상·비용 안내</Link></nav>
       <div className="footer-bottom"><span>© {today.slice(0, 4)} {company.legalName}</span><span>{isPublicProduction ? '교육 문의 055-389-0302 · 온라인 예약·결제 미운영' : '화면 확인용 · 온라인 신청은 접수되지 않습니다.'}</span></div></div></footer>
     <nav className="mobile-actions" aria-label="빠른 문의 및 접수 안내"><a href={company.phoneHref} className="mobile-contact"><span>전화 문의</span><strong>{company.phone}</strong></a><a href="#schedule" className="mobile-schedule">교육시간·접수 <span aria-hidden="true">↗</span></a></nav>

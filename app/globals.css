@@ -313,3 +313,30 @@ details[open] .faq-plus:after{transform:rotate(0)}
 @media(max-width:370px){.hero-photo.hero-slider{aspect-ratio:.94}.slider-caption{left:17px;right:17px;bottom:88px}.slider-caption h2{font-size:22px}.slider-caption p{font-size:13px}.slider-caption .photo-label{font-size:11px}.slider-controls{left:14px;right:14px;gap:4px}.slider-navigation{gap:3px}.slider-pagination button{width:20px}.slider-counter{top:15px;left:17px}}
 
 @media(max-width:370px){.hero-actions .button{font-size:13px;gap:6px;padding-inline:10px}}
+
+.free-education-panel{margin-top:28px;padding:30px;border:1px solid #cfdbeb;border-radius:10px;background:#fff;scroll-margin-top:100px}
+.free-education-panel h3{font-size:23px;margin:8px 0 12px}
+.free-education-panel p{line-height:1.8;color:var(--muted);font-size:15px}
+.free-targets{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:20px 0}
+.free-targets li{padding:8px 14px;border-radius:5px;background:#edf3fa;color:var(--ink);font-size:15px;font-weight:700}
+.free-status,.policy-page p.free-status{padding:14px 18px;border-left:3px solid #a66b1e;background:#fff7e9;color:#6d4818;line-height:1.8;font-size:14px}
+.free-preparation{margin-top:18px;display:grid;gap:5px}
+.free-preparation strong{color:var(--ink);margin-right:8px}
+.free-links{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:20px}
+.registration-evidence{display:grid;grid-template-columns:160px minmax(0,1fr);gap:32px;align-items:center;padding:28px;margin:28px 0;border:1px solid var(--line);border-radius:10px;background:#f7f9fc}
+.registration-thumbnail{display:block;overflow:hidden;border:1px solid #d0d9e5;background:#fff;border-radius:5px;text-align:center}
+.registration-thumbnail img{display:block;width:100%;height:auto}
+.registration-thumbnail span{display:block;padding:10px 4px;font-size:12px;color:var(--ink);font-weight:700}
+.registration-details h3{font-size:22px;margin:8px 0 16px}
+.registration-details dl{display:grid;gap:8px;margin:0}
+.registration-details dl>div{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:15px}
+.registration-details dt{color:var(--muted);flex-basis:135px}
+.registration-details dd{margin:0;font-weight:700;color:var(--ink)}
+.registration-details>p:not(.eyebrow){font-size:14px;line-height:1.8;color:var(--muted);margin:16px 0 12px}
+.policy-page .registration-evidence{margin:20px 0}
+.policy-page .registration-details .eyebrow{font-size:11px;margin:0}
+.policy-page .registration-details>p:not(.eyebrow){font-size:14px}
+.footer-registration{font-size:13px;line-height:1.8;color:var(--muted);margin-top:14px}
+.footer-registration a{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:800px){.free-education-panel{padding:22px 20px}.free-education-panel h3{font-size:21px}.free-links{flex-direction:column;align-items:flex-start}.free-targets{gap:8px}.free-targets li{padding:7px 10px;font-size:14px}.registration-evidence{gap:22px;padding:22px;grid-template-columns:120px minmax(0,1fr)}.registration-details h3{font-size:20px}.registration-details dl>div{font-size:14px}.registration-details dt{flex-basis:auto}.registration-details .eyebrow{font-size:10px}}
+@media(max-width:520px){.registration-evidence{grid-template-columns:1fr;gap:22px}.registration-thumbnail{width:150px}.registration-details h3{font-size:21px}.registration-details dl>div{gap:5px 12px}.registration-details dt{flex-basis:122px}.free-preparation strong{display:block}.free-status,.policy-page p.free-status{padding:12px 14px}}

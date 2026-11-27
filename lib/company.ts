@@ -1,5 +1,6 @@
 // Public business information from the registration certificate and subsequent user corrections.
-// The certificate image and corporate registration number are not published.
+// The tax certificate image and corporate registration number are not published.
+// The separate training-institution certificate is recorded in education-info.ts.
 export const company = {
   legalName: '주식회사 한국안전교육',
   representatives: '최현주·안정현',
