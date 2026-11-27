@@ -1,9 +1,9 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import QRCode from 'qrcode';
 import { Header } from '../components/header';
 import { HeroSlider } from '../components/hero-slider';
-import { galleryPhotos } from '../lib/education-photos';
+import { PhotoGallery } from '../components/photo-gallery';
+import { MobileActions } from '../components/mobile-actions';
 import { MaterialsLibrary } from '../components/materials-library';
 import { EducationSchedule } from '../components/education-schedule';
 import { ShareSite } from '../components/share-site';
@@ -112,12 +112,7 @@ export default async function Home() {
 
       <section className="section container facility-section" id="facility">
         <div className="section-heading"><div><p className="eyebrow">OUR CLASSROOM</p><h2>교육 현장과 실습</h2></div><p className="section-description">한국안전교육의 실제 강의실과<br />안전보건교육 모습을 확인하세요.</p></div>
-        <div className="facility-grid">
-          {galleryPhotos.map(item => <article className="facility-card" key={item.file}>
-            <div className="facility-image"><Image src={`/images/center/${item.file}`} alt={item.alt} width={item.width} height={item.height} style={{ objectPosition: item.position }} sizes="(max-width: 800px) calc(100vw - 40px), (max-width: 1280px) 30vw, 370px" /></div>
-            <div><h3>{item.title}</h3><p>{item.text}</p></div>
-          </article>)}
-        </div>
+        <PhotoGallery />
         <p className="image-disclaimer">위 사진은 한국안전교육에서 제공한 실제 교육 현장 사진입니다. 촬영 당시 모습으로 현재 교육 구성은 달라질 수 있습니다.</p>
       </section>
 
@@ -183,7 +178,7 @@ export default async function Home() {
       <p className="footer-registration">건설업 기초안전·보건교육기관 등록번호 {educationInfo.registrationNumber} · <a href={educationInfo.registrationImage} target="_blank" rel="noopener noreferrer">등록증 보기</a></p>
       <nav className="footer-policy-links" aria-label="개인정보 및 이용 안내"><Link href="/privacy">개인정보 처리 안내</Link><Link href="/terms">홈페이지 이용안내</Link><Link href="/education-guide">교육 대상·비용 안내</Link></nav>
       <div className="footer-bottom"><span>© {today.slice(0, 4)} {company.legalName}</span><span>{isPublicProduction ? '교육 문의 055-389-0302 · 온라인 예약·결제 미운영' : '화면 확인용 · 온라인 신청은 접수되지 않습니다.'}</span></div></div></footer>
-    <nav className="mobile-actions" aria-label="빠른 문의 및 접수 안내"><a href={company.phoneHref} className="mobile-contact"><span>전화 문의</span><strong>{company.phone}</strong></a><a href="#schedule" className="mobile-schedule">교육시간·접수 <span aria-hidden="true">↗</span></a></nav>
+    <MobileActions scheduleHref="#schedule" />
   </>;
 }
 

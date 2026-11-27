@@ -55,7 +55,7 @@ export function HeroSlider() {
       else swiper?.slideNext();
     }}
   >
-    <Swiper
+    <div className="hero-media"><Swiper
       id="hero-slides"
       className="hero-swiper"
       modules={[A11y, Autoplay]}
@@ -75,6 +75,7 @@ export function HeroSlider() {
       </SwiperSlide>)}
     </Swiper>
     <span className="slider-counter" aria-label={`전체 5장 중 ${active + 1}번째 사진`}>{String(active + 1).padStart(2, '0')}<span> / 05</span></span>
+    </div>
     <div className="slider-caption" aria-live={autoplayAllowed ? 'off' : 'polite'} aria-atomic="true">
       <span className="photo-label">한국안전교육 실제 교육 현장</span>
       <h2>{heroPhotos[active].title}</h2>
