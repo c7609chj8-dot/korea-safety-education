@@ -182,7 +182,7 @@ export default async function Home() {
       <section className="footer-company" id="business-info" aria-label="사업자 정보"><h2>{company.legalName}</h2><dl className="footer-business-info"><div><dt>공동대표</dt><dd>{company.representatives}</dd></div><div><dt>사업자등록번호</dt><dd>{company.businessNumber}</dd></div><div className="business-address"><dt>사업장 소재지</dt><dd>{company.address}</dd></div><div><dt>전화</dt><dd><a href={company.phoneHref}>{company.phone}</a></dd></div><div><dt>팩스</dt><dd>{company.fax}</dd></div></dl></section>
       <nav className="footer-policy-links" aria-label="개인정보 및 이용 안내"><Link href="/privacy">개인정보 처리 안내</Link><Link href="/terms">홈페이지 이용안내</Link><Link href="/education-guide">교육 대상·비용 안내</Link></nav>
       <div className="footer-bottom"><span>© {today.slice(0, 4)} {company.legalName}</span><span>{isPublicProduction ? '교육 문의 055-389-0302 · 온라인 예약·결제 미운영' : '화면 확인용 · 온라인 신청은 접수되지 않습니다.'}</span></div></div></footer>
-    <nav className="mobile-actions" aria-label="빠른 문의 및 접수 안내"><a href={company.phoneHref} className="mobile-contact"><span>전화 문의</span><strong>{company.phone}</strong></a><a href="#schedule" className="mobile-schedule">교육시간·접수 안내 <span aria-hidden="true">↗</span></a></nav>
+    <nav className="mobile-actions" aria-label="빠른 문의 및 접수 안내"><a href={company.phoneHref} className="mobile-contact"><span>전화 문의</span><strong>{company.phone}</strong></a><a href="#schedule" className="mobile-schedule">교육시간·접수 <span aria-hidden="true">↗</span></a></nav>
   </>;
 }
 

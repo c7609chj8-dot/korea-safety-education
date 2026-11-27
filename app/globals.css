@@ -759,7 +759,7 @@ body { background: var(--paper); }
 .calendar-controls button { min-width: 44px; min-height: 44px; font-size: 14px; }
 .weekdays { font-size: 13px; }
 .day-number { font-size: 16px; }
-.day-status { font-size: 11px; line-height: 1.5; }
+.day-status { font-size: 12px; line-height: 1.5; }
 .calendar-day { min-height: 66px; }
 .calendar-footnote { gap: 8px; }
 .calendar-footnote > span:last-child { margin-left: 0; flex-basis: 100%; }

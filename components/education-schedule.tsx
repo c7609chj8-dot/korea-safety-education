@@ -72,7 +72,7 @@ function ScheduleCalendar({ today }: { today: string }) {
             const status = scheduleDay.label;
             return <button type="button" key={key} className={`calendar-day ${selected === key ? 'selected' : ''} ${unavailable ? 'unavailable' : ''}`} aria-pressed={selected === key} aria-label={`${view.month + 1}월 ${number}일 ${status}`} onClick={() => chooseDate(key)}>
               <span className="day-number">{number}{key === today ? <i className="today-dot" aria-label="오늘" /> : null}</span>
-              <span className="day-status">{status === '공휴일 휴무' ? '공휴일' : status === '지난 날짜' ? '지난날' : status}</span>
+              <span className="day-status">{status === '공휴일 휴무' ? '공휴일' : status === '지난 날짜' ? '지난날' : status === '평일 교육' ? '교육' : status === '확인 필요' ? '확인' : status}</span>
             </button>;
           })}
         </div>
