@@ -21,15 +21,9 @@ const instructors = [
   { name: '신윤철', position: '교육 담당', field: '안전교육', initial: '신', description: '건설업 기초안전보건교육의 안전교육을 담당합니다.' },
 ];
 
-const notices = [
-  { label: '공지', title: '교육 신청 전 꼭 확인해 주세요', text: '교육 당일 본인 확인을 위해 신분증을 반드시 지참해 주세요.' },
-  { label: '접수', title: '평일 12시 40분까지 접수', text: '신분증을 지참해 평일 12:40까지 접수해 주세요. 토요일은 예약제이며 일요일·법정공휴일은 휴무입니다.' },
-  { label: '주차', title: '교육생 주차 안내', text: '교육생 주차가 가능합니다. 이용 위치는 방문 전 문의해 주세요.' },
-];
-
 const preparations = [
   { number: '01', title: '신분증 필수', text: '본인 확인을 위해 반드시 지참해 주세요.' },
-  { number: '02', title: '평일 12:40까지 접수', text: '토요일은 사전 예약 후 안내받은 시간에 방문해 주세요.' },
+  { number: '02', title: '주차 위치 확인', text: '교육생 주차가 가능합니다. 이용 위치는 방문 전에 전화로 확인해 주세요.' },
   { number: '03', title: '교육비 확인', text: '센터 안내금액은 80,000원이며 최종 금액은 접수 전에 확인해 주세요.' },
 ];
 
@@ -83,7 +77,7 @@ export default async function Home() {
             <p className="eyebrow"><span className="tiny-line" /> 양산 · 부산 · 경남 교육생을 위한 법정 안전교육</p>
             <h1>건설업 기초<br /><em>안전보건교육</em></h1>
             <p className="hero-tagline">안전한 현장의 첫걸음, 교육에서 시작합니다.</p>
-            <p className="hero-description">평일 13:00~17:00 · 접수 12:40까지<br />토요일 09:00~13:00 예약제 · 일요일·법정공휴일 휴무<br />신분증 지참 · 교육생 주차 가능</p>
+            <p className="hero-description">평일 접수 12:40까지 · 토요일 사전 예약<br />일요일·법정공휴일 휴무</p>
             <div className="hero-actions">
               <a href="#schedule" className="button button-dark">교육시간·접수 안내 <span aria-hidden="true">↗</span></a>
               <a href={`tel:${company.phone.replaceAll('-', '')}`} className="hero-phone">전화 문의 <span aria-hidden="true">→</span></a>
@@ -136,7 +130,7 @@ export default async function Home() {
       </section>
 
       <section className="schedule-section section" id="schedule"><div className="container">
-        <div className="section-heading"><div><p className="eyebrow">SCHEDULE</p><h2>교육시간·접수 안내</h2></div><div className="schedule-heading-note"><span className="outline-tag">전화·방문 접수</span><p className="section-description">교육일과 접수 가능 여부를 전화로 확인해 주세요.<br />토요일 교육은 사전 예약이 필요합니다.</p></div></div>
+        <div className="section-heading"><div><p className="eyebrow">SCHEDULE</p><h2>교육시간·접수 안내</h2></div><div className="schedule-heading-note"><span className="outline-tag">전화·방문 접수</span><p className="section-description">아래 운영시간과 달력을 확인한 뒤<br />전화로 교육일을 문의해 주세요.</p></div></div>
         <div className="schedule-summary" aria-label="교육 운영 안내"><div><span>평일 교육 · 접수 12:40까지</span><strong>월요일~금요일 13:00~17:00</strong></div><div><span>토요일 예약제</span><strong>토요일 09:00~13:00</strong></div><div><span>휴무 안내</span><strong>일요일·법정공휴일 휴무</strong></div></div>
         <ol className="registration-steps" aria-label="교육 접수 방법">
           <li><span>01</span><div><h3>전화로 교육일 확인</h3><p><a href={company.phoneHref}>{company.phone}</a>로 교육일과 접수 가능 인원을 확인하세요. 토요일은 전화로 미리 예약해 주세요.</p></div></li>
@@ -147,7 +141,7 @@ export default async function Home() {
       </div></section>
 
       <section className="section container facility-section" id="facility">
-        <div className="section-heading"><div><p className="eyebrow">OUR CLASSROOM</p><h2>교육 현장과 실습</h2></div><p className="section-description">한국안전교육의 실제 강의실과 교육 모습을 확인하세요.<br />교육장·주차 위치는 방문 전 전화로 문의해 주세요.</p></div>
+        <div className="section-heading"><div><p className="eyebrow">OUR CLASSROOM</p><h2>교육 현장과 실습</h2></div><p className="section-description">한국안전교육의 실제 강의실과<br />안전보건교육 모습을 확인하세요.</p></div>
         <div className="facility-grid">
           {gallery.map(item => <article className="facility-card" key={item.file}>
             <div className="facility-image"><Image src={`/images/center/${item.file}`} alt={item.alt} width={item.width} height={item.height} sizes="(max-width: 800px) calc(100vw - 40px), (max-width: 1280px) 30vw, 370px" /></div>
@@ -157,13 +151,8 @@ export default async function Home() {
         <p className="image-disclaimer">위 사진은 한국안전교육에서 제공한 실제 교육 현장 사진입니다. 촬영 당시 모습으로 현재 교육 구성은 달라질 수 있습니다.</p>
       </section>
 
-      <section className="notice-section section"><div className="container">
-        <div className="section-heading"><div><p className="eyebrow">NOTICE</p><h2>교육 안내</h2></div><p className="section-description">교육 전에 알아두면 좋은 내용을<br />한눈에 확인하세요.</p></div>
-        <div className="notice-grid">{notices.map((notice) => <article key={notice.title}><span>{notice.label}</span><h3>{notice.title}</h3><p>{notice.text}</p></article>)}</div>
-      </div></section>
-
       <section className="preparation-section section" aria-labelledby="preparation-title">
-        <div className="container"><div className="section-heading"><div><p className="eyebrow">BEFORE CLASS</p><h2 id="preparation-title">교육 당일 준비물</h2></div><p className="section-description">교육 시작 전 아래 내용을 다시 한번 확인해 주세요.</p></div>
+        <div className="container"><div className="section-heading"><div><p className="eyebrow">BEFORE CLASS</p><h2 id="preparation-title">방문 전 확인사항</h2></div><p className="section-description">신분증·주차 위치·교육비를 미리 확인하세요.</p></div>
           <div className="preparation-grid">{preparations.map((item) => <article key={item.number}><span>{item.number}</span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
         </div>
       </section>
@@ -187,7 +176,7 @@ export default async function Home() {
 
       <ShareSite siteUrl={siteUrl} qrCodeSvg={qrCodeSvg} />
 
-      <section className="contact-strip" id="contact"><div className="container"><div><p className="eyebrow">전화 접수 및 문의</p><h2>안전교육, 지금 편하게 상담하세요.</h2><p>교육일정과 준비물을 친절하게 안내해 드립니다.</p></div><div className="contact-actions"><a href={company.phoneHref}>전화 상담 {company.phone} <span aria-hidden="true">↗</span></a><a href={`sms:01072592558?body=${encodeURIComponent('안녕하세요. 건설업 기초안전보건교육 문의드립니다.')}`}>문자 문의 <span aria-hidden="true">↗</span></a></div></div></section>
+      <section className="contact-strip" id="contact"><div className="container"><div><p className="eyebrow">전화 접수 및 문의</p><h2>안전교육, 지금 편하게 상담하세요.</h2><p>교육일정·접수·주차 문의를 안내합니다.</p></div><div className="contact-actions"><a href={company.phoneHref}>전화 상담 {company.phone} <span aria-hidden="true">↗</span></a><a href={`sms:01072592558?body=${encodeURIComponent('안녕하세요. 건설업 기초안전보건교육 문의드립니다.')}`}>문자 문의 <span aria-hidden="true">↗</span></a></div></div></section>
     </main>
     <footer className="footer"><div className="container"><div className="footer-top"><a className="brand" href="#top"><span className="brand-mark" aria-hidden="true">K<span>.</span></span><span><strong>한국안전교육</strong><small>KOREA SAFETY EDUCATION</small></span></a><a href="#top" className="back-top">맨 위로 <span aria-hidden="true">↑</span></a></div>
       <section className="footer-company" id="business-info" aria-label="사업자 정보"><h2>{company.legalName}</h2><dl className="footer-business-info"><div><dt>공동대표</dt><dd>{company.representatives}</dd></div><div><dt>사업자등록번호</dt><dd>{company.businessNumber}</dd></div><div className="business-address"><dt>사업장 소재지</dt><dd>{company.address}</dd></div><div><dt>전화</dt><dd><a href={company.phoneHref}>{company.phone}</a></dd></div><div><dt>팩스</dt><dd>{company.fax}</dd></div></dl></section>

@@ -731,3 +731,115 @@ body { background: var(--paper); }
   .share-actions { grid-template-columns: 1fr; }
 }
 
+/* Readable copy and touch controls across the public site. */
+:root { --muted: #59634f; }
+.section-description, .hero-description, .faq-list details > p,
+.registration-steps p, .schedule-day-note, .schedule-caption,
+.facility-card p, .preparation-grid p, .resource-grid p,
+.instructor-card > p.instructor-description, .share-copy > p:not(.eyebrow),
+.education-legal-note p { font-size: 15px; line-height: 1.85; }
+.faq-list summary { font-size: 16px; }
+.hero-location, .hero-phone, .date-specs, .location-info,
+.resource-grid strong, .related-grid strong, .education-legal-note strong,
+.share-actions .button, .contact-strip .contact-actions a { font-size: 15px; }
+.quick-facts > div > span, .schedule-summary span, .instructor-card > p,
+.instructor-card > span, .resource-grid > a > span, .resource-upload-card > span,
+.image-disclaimer, .slider-caption p, .slider-disclaimer, .calendar-footnote,
+.footer-business-info, .footer-business-info dt, .footer-bottom,
+.footer-policy-links, .policy-footer nav, .policy-date,
+.policy-contact, .policy-footer p, .share-actions .share-result { font-size: 13px; }
+.schedule-summary strong, .slider-topline > span:last-child,
+.location-map-caption, .location-map-caption span, .text-link,
+.date-detail .text-link, .policy-header .text-link { font-size: 14px; }
+.schedule-summary > div { align-content: start; }
+.date-detail .button { font-size: 15px; }
+.date-specs > div { flex-wrap: wrap; }
+.date-specs dd { margin-left: auto; }
+.status-tag { font-size: 13px; }
+.calendar-controls button { min-width: 44px; min-height: 44px; font-size: 14px; }
+.weekdays { font-size: 13px; }
+.day-number { font-size: 16px; }
+.day-status { font-size: 11px; line-height: 1.5; }
+.calendar-day { min-height: 66px; }
+.calendar-footnote { gap: 8px; }
+.calendar-footnote > span:last-child { margin-left: 0; flex-basis: 100%; }
+.materials-loading, .materials-empty, .materials-message,
+.materials-selected, .materials-progress { font-size: 14px !important; }
+.materials-list { padding-left: 0; list-style: none; }
+.materials-list span { white-space: normal; overflow-wrap: anywhere; font-size: 15px; }
+.materials-list small { font-size: 13px; }
+.materials-form label { font-size: 14px; }
+.materials-form label > span { flex-wrap: wrap; }
+.materials-form em { font-size: 13px; }
+.materials-form input { font-size: 16px; min-height: 44px; }
+.materials-form .button { font-size: 15px; }
+.slider-caption { min-height: 108px; }
+.slider-navigation button { width: 44px; height: 44px; }
+.slider-pagination button { width: 28px; min-height: 44px; padding-inline: 4px; }
+.slider-counter { font-size: 13px; }
+.slider-controls { flex-wrap: wrap; }
+.slider-topline { flex-wrap: wrap; gap: 4px 16px; }
+.share-copy code { font-size: 13px; }
+.footer-policy-links a, .policy-footer nav a { display: inline-flex; align-items: center; min-height: 44px; }
+.policy-page > section p { font-size: 15px; }
+.policy-page { overflow-wrap: anywhere; }
+@media (max-width: 800px) {
+  body { font-size: 16px; letter-spacing: -.025em; }
+  .hero .eyebrow { font-size: 12px; letter-spacing: .01em; }
+  .hero-actions { flex-wrap: wrap; gap: 12px 22px; }
+  .hero-actions .button { font-size: 15px; }
+  .hero-phone { min-height: 44px; align-items: center; }
+  .hero-location { font-size: 14px; align-items: baseline; }
+  .location-dot { flex-shrink: 0; }
+  .quick-facts { padding: 20px 16px; gap: 20px 0; }
+  .quick-facts > div { min-width: 0; }
+  .quick-facts > div:nth-child(even) { padding-left: 12px; }
+  .quick-facts strong { font-size: clamp(18px, 5vw, 22px); overflow-wrap: anywhere; }
+  .menu-toggle { min-height: 44px; font-size: 14px; flex-shrink: 0; }
+  .preview-note { font-size: 13px; padding: 8px 20px; }
+  .about-stats { grid-template-columns: 1fr; gap: 16px; }
+  .about-stats > div { display: flex; align-items: baseline; gap: 16px; }
+  .about-stats dt { flex: 0 0 70px; font-size: 22px; }
+  .about-stats dd { margin: 0; font-size: 14px; }
+  .schedule-summary > div { grid-template-columns: 1fr; gap: 5px; }
+  .schedule-summary strong { font-size: 16px; }
+  .calendar { padding: 20px 12px; }
+  .calendar-top { flex-wrap: wrap; gap: 12px; }
+  .calendar-top h3 { font-size: 24px; }
+  .calendar-days { gap: 2px; }
+  .date-detail { padding: 22px 18px; }
+  .date-detail .eyebrow { font-size: 12px; }
+  .location-address { font-size: 16px; }
+  .location-info > div { gap: 16px; }
+  .map-links { flex-wrap: wrap; }
+  .map-links .button { min-height: 48px; font-size: 15px; }
+  .location-map-caption { flex-wrap: wrap; gap: 6px; }
+  .share-panel { grid-template-columns: 1fr; gap: 18px; padding: 22px 18px; }
+  .share-qr { width: 110px; height: 110px; }
+  .share-actions { grid-column: auto; grid-template-columns: 1fr; }
+  .contact-strip .contact-actions a { font-size: 15px; white-space: normal; }
+  .footer-business-info > div { flex-wrap: wrap; gap: 2px 12px; }
+  .footer-business-info dt { flex-basis: 100px; }
+  .footer-business-info dd { flex: 1 1 170px; }
+  .footer-bottom { font-size: 13px; }
+  .footer { padding-bottom: calc(108px + env(safe-area-inset-bottom)); }
+  .mobile-contact span { font-size: 13px; }
+  .mobile-contact strong { font-size: 15px; }
+  .mobile-schedule { font-size: 15px; gap: 8px; text-align: center; }
+  .mobile-actions a { padding-inline: 10px; }
+  .slider-caption h2 { font-size: 18px; }
+  .slider-disclaimer { padding-top: 6px; }
+  .policy-page > section p { font-size: 15px; }
+}
+@media (max-width: 370px) {
+  .brand strong { font-size: 16px; }
+  .brand { gap: 8px; }
+  .header-inner { gap: 12px; }
+  .menu-toggle { padding-inline: 9px; }
+  .day-status { letter-spacing: -.08em; }
+  .slider-controls { justify-content: center; gap: 4px 16px; }
+  .slider-navigation { gap: 4px; }
+  .slider-counter { margin-right: 5px; }
+  .mobile-schedule { gap: 4px; font-size: 14px; }
+  .mobile-contact strong { font-size: 14px; }
+}
