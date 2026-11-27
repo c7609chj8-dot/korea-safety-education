@@ -22,7 +22,8 @@ export const initialMaterials: Material[] = [
 
 export function materialFromBlob(blob: { pathname: string; url: string; downloadUrl: string; size: number; uploadedAt: Date | string }): Material {
   const filename = blob.pathname.split('/').pop() || '교육자료.pdf';
-  const title = filename.replace(/^\d+-/, '').replace(/-[A-Za-z0-9_-]{8,}(?=\.[^.]+$)/, '').replace(/\.[^.]+$/, '').replace(/-/g, ' ');
+  // Strip the final generated suffix only; never consume hyphen-separated title words.
+  const title = filename.replace(/^\d+-/, '').replace(/-[A-Za-z0-9_]{8,}(?=\.[^.]+$)/, '').replace(/\.[^.]+$/, '').replace(/-/g, ' ');
   return { ...blob, id: blob.pathname, title, category: blob.pathname.startsWith('materials/cases/') ? '사고사례' : '교육자료', uploadedAt: new Date(blob.uploadedAt).toISOString() };
 }
 

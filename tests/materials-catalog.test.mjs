@@ -26,3 +26,9 @@ test('legacy and categorized uploads retain titles and correct category', () => 
   assert.equal(materialFromBlob({ ...base, pathname: 'materials/cases/123-사고사례-AbCdEfGhIjKl.pdf' }).category, '사고사례');
   assert.equal(materialFromBlob({ ...base, pathname: 'materials/guides/123-교육자료.pdf' }).category, '교육자료');
 });
+
+test('English multiword upload titles remain complete and searchable after the Blob suffix is removed', () => {
+  const item = materialFromBlob({ pathname: 'materials/guides/123-Safety-Training-Guide-AbCdEfGhIjKl.pdf', url: 'https://example.test/file.pdf', downloadUrl: 'https://example.test/download', size: 123, uploadedAt: '2026-11-27' });
+  assert.equal(item.title, 'Safety Training Guide');
+  assert.equal(filterMaterials([item], 'training guide', '전체').length, 1);
+});
