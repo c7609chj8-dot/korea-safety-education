@@ -311,3 +311,5 @@ details[open] .faq-plus:after{transform:rotate(0)}
 .hero-slider button:focus-visible{outline-color:#b4e8e1;outline-offset:2px}
 @media(max-width:800px){.hero-photo.hero-slider{aspect-ratio:1.1}.slider-counter{top:18px;left:20px;font-size:13px}.slider-caption{left:21px;right:21px;bottom:91px}.slider-caption h2{font-size:23px}.slider-caption p{font-size:13px}.slider-controls{left:20px;right:20px;bottom:17px}.slider-pagination button{width:22px}}
 @media(max-width:370px){.hero-photo.hero-slider{aspect-ratio:.94}.slider-caption{left:17px;right:17px;bottom:88px}.slider-caption h2{font-size:22px}.slider-caption p{font-size:13px}.slider-caption .photo-label{font-size:11px}.slider-controls{left:14px;right:14px;gap:4px}.slider-navigation{gap:3px}.slider-pagination button{width:20px}.slider-counter{top:15px;left:17px}}
+
+@media(max-width:370px){.hero-actions .button{font-size:13px;gap:6px;padding-inline:10px}}
