@@ -20,7 +20,7 @@ const embeddedMap = `https://www.google.com/maps?q=${encodeURIComponent(company.
 
 const instructors = [
   { name: '최현주', position: '대표이사', field: '안전교육총괄', initial: '최', description: '한국안전교육의 안전교육 운영을 총괄합니다.' },
-  { name: '안정현', position: '교육 담당', field: '보건교육', initial: '안', description: '건설업 기초안전보건교육의 보건교육을 담당합니다.' },
+  { name: '안정현', position: '대표이사', field: '보건교육', initial: '안', description: '건설업 기초안전보건교육의 보건교육을 담당합니다.' },
   { name: '신윤철', position: '교육 담당', field: '안전교육', initial: '신', description: '건설업 기초안전보건교육의 안전교육을 담당합니다.' },
 ];
 
