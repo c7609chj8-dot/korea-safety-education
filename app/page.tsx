@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import QRCode from 'qrcode';
 import { Header } from '../components/header';
-import { HeroSlider } from '../components/hero-slider';
 import { MaterialsLibrary } from '../components/materials-library';
 import { EducationSchedule } from '../components/education-schedule';
 import { ShareSite } from '../components/share-site';
@@ -19,12 +18,6 @@ const instructors = [
   { name: '최현주', position: '대표이사', field: '안전교육총괄', initial: '최', description: '한국안전교육의 안전교육 운영을 총괄합니다.' },
   { name: '안정현', position: '교육 담당', field: '보건교육', initial: '안', description: '건설업 기초안전보건교육의 보건교육을 담당합니다.' },
   { name: '신윤철', position: '교육 담당', field: '안전교육', initial: '신', description: '건설업 기초안전보건교육의 안전교육을 담당합니다.' },
-];
-
-const preparations = [
-  { number: '01', title: '신분증 필수', text: '본인 확인을 위해 반드시 지참해 주세요.' },
-  { number: '02', title: '주차 위치 확인', text: '교육생 주차가 가능합니다. 이용 위치는 방문 전에 전화로 확인해 주세요.' },
-  { number: '03', title: '교육비 확인', text: '센터 안내금액은 80,000원이며 최종 금액은 접수 전에 확인해 주세요.' },
 ];
 
 const faqs = [
@@ -64,7 +57,7 @@ export default async function Home() {
     errorCorrectionLevel: 'M',
     margin: 1,
     width: 196,
-    color: { dark: '#33402f', light: '#fffdf8' },
+    color: { dark: '#172d4a', light: '#ffffff' },
   });
 
   return <>
@@ -74,29 +67,60 @@ export default async function Home() {
       <section className="hero" id="top">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow"><span className="tiny-line" /> 양산 · 부산 · 경남 교육생을 위한 법정 안전교육</p>
+            <p className="eyebrow"><span className="tiny-line" /> 한국안전교육 · 양산</p>
             <h1>건설업 기초<br /><em>안전보건교육</em></h1>
-            <p className="hero-tagline">안전한 현장의 첫걸음, 교육에서 시작합니다.</p>
-            <p className="hero-description">평일 접수 12:40까지 · 토요일 사전 예약<br />일요일·법정공휴일 휴무</p>
+            <p className="hero-tagline">현장에 가기 전, 안전부터 배웁니다.</p>
+            <p className="hero-description">건설현장에서 필요한 안전수칙을<br />실제 사례와 교육용 교구로 알기 쉽게 안내합니다.</p>
+            <div className="hero-operating"><span>평일 13:00–17:00</span><strong>접수 12:40까지</strong></div>
             <div className="hero-actions">
-              <a href="#schedule" className="button button-dark">교육시간·접수 안내 <span aria-hidden="true">↗</span></a>
-              <a href={`tel:${company.phone.replaceAll('-', '')}`} className="hero-phone">전화 문의 <span aria-hidden="true">→</span></a>
+              <a href="#schedule" className="button button-dark">교육시간 확인 <span aria-hidden="true">↗</span></a>
+              <a href={company.phoneHref} className="button button-outline">전화 문의 <span aria-hidden="true">↗</span></a>
             </div>
-            <p className="hero-location"><span className="location-dot" aria-hidden="true" />{company.shortAddress}</p>
+            <p className="hero-contact">접수 문의 <a href={company.phoneHref}>{company.phone}</a><span>토요일 사전 예약 · 일요일·공휴일 휴무</span></p>
           </div>
-          <HeroSlider />
+          <figure className="hero-photo">
+            <Image src="/images/center/harness-practice.jpg" alt="한국안전교육에서 강사가 안내하는 안전대 착용 체험 실습" width={1613} height={907} sizes="(max-width: 800px) calc(100vw - 40px), (max-width: 1280px) 48vw, 600px" preload />
+            <figcaption><span className="photo-label">OUR CLASSROOM</span><strong>직접 보고, 함께 배우는 안전</strong><span>한국안전교육 실제 교육 현장 · 안전대 체험 실습</span></figcaption>
+          </figure>
         </div>
-        <div className="container quick-facts" aria-label="교육 핵심 안내">
-          <div><span>01 / 평일 교육</span><strong>13:00–17:00</strong></div>
-          <div><span>02 / 교육비 안내</span><strong>80,000<span>원</span></strong></div>
-          <div><span>03 / 준비물</span><strong>신분증</strong></div>
-          <div><span>04 / 토요일</span><strong>예약제 운영</strong></div>
+      </section>
+
+      <section className="start-section" aria-labelledby="start-title">
+        <div className="container">
+          <div className="start-heading"><p className="eyebrow">방문 전, 먼저 확인하세요</p><h2 id="start-title">교육 준비, 세 가지만 확인하세요.</h2></div>
+          <div className="start-grid">
+            <article className="start-card"><span className="card-number">01 / SCHEDULE</span><h3>교육시간</h3><strong className="card-value">평일 13:00–17:00</strong><p>평일 접수는 12:40까지<br />토요일 09:00–13:00 사전 예약제</p><a href="#schedule">교육일·접수 안내 <span aria-hidden="true">↗</span></a></article>
+            <article className="start-card"><span className="card-number">02 / PREPARATION</span><h3>준비물과 교육비</h3><strong className="card-value">신분증을 챙겨주세요.</strong><p>센터 안내 교육비 80,000원<br />비용 부담·지원 조건은 접수 전 확인</p><Link href="/education-guide">교육 대상·비용 안내 <span aria-hidden="true">↗</span></Link></article>
+            <article className="start-card"><span className="card-number">03 / LOCATION</span><h3>오시는 길</h3><strong className="card-value">양산시 북정서길 22</strong><p>201호 · 새롬성원네오파트 상가<br />교육생 주차 가능 · 위치는 전화 문의</p><a href="#location">지도·주차 안내 <span aria-hidden="true">↗</span></a></article>
+          </div>
         </div>
+      </section>
+
+      <section className="schedule-section section" id="schedule"><div className="container">
+        <div className="section-heading"><div><p className="eyebrow">SCHEDULE</p><h2>교육시간·접수 안내</h2></div><div className="schedule-heading-note"><span className="outline-tag">전화·방문 접수</span><p className="section-description">아래 운영시간과 달력을 확인한 뒤<br />전화로 교육일을 문의해 주세요.</p></div></div>
+        <div className="schedule-summary" aria-label="교육 운영 안내"><div><span>평일 교육 · 접수 12:40까지</span><strong>월요일~금요일 13:00~17:00</strong></div><div><span>토요일 예약제</span><strong>토요일 09:00~13:00</strong></div><div><span>휴무 안내</span><strong>일요일·법정공휴일 휴무</strong></div></div>
+        <ol className="registration-steps" aria-label="교육 접수 방법">
+          <li><span>01</span><div><h3>전화로 교육일 확인</h3><p><a href={company.phoneHref}>{company.phone}</a>로 교육일과 접수 가능 인원을 확인하세요. 토요일은 전화로 미리 예약해 주세요.</p></div></li>
+          <li><span>02</span><div><h3>신분증 지참 후 방문</h3><p>평일은 12:40까지 접수해 주세요. 토요일은 예약 시 안내받은 시간에 방문하세요.</p></div></li>
+          <li><span>03</span><div><h3>현장에서 접수 안내</h3><p>본인 확인과 교육비 등 접수 절차를 안내받으세요. 홈페이지에서는 온라인 신청·결제를 받지 않습니다.</p></div></li>
+        </ol>
+        <EducationSchedule />
+      </div></section>
+
+      <section className="section container facility-section" id="facility">
+        <div className="section-heading"><div><p className="eyebrow">OUR CLASSROOM</p><h2>교육 현장과 실습</h2></div><p className="section-description">한국안전교육의 실제 강의실과<br />안전보건교육 모습을 확인하세요.</p></div>
+        <div className="facility-grid">
+          {gallery.map(item => <article className="facility-card" key={item.file}>
+            <div className="facility-image"><Image src={`/images/center/${item.file}`} alt={item.alt} width={item.width} height={item.height} sizes="(max-width: 800px) calc(100vw - 40px), (max-width: 1280px) 30vw, 370px" /></div>
+            <div><h3>{item.title}</h3><p>{item.text}</p></div>
+          </article>)}
+        </div>
+        <p className="image-disclaimer">위 사진은 한국안전교육에서 제공한 실제 교육 현장 사진입니다. 촬영 당시 모습으로 현재 교육 구성은 달라질 수 있습니다.</p>
       </section>
 
       <section className="section container about-section" id="about">
         <div className="section-heading">
-          <div><p className="eyebrow">ABOUT US</p><h2>안전은 교육에서<br />시작됩니다.</h2></div>
+          <div><p className="eyebrow">ABOUT US</p><h2>현장을 이해하는 교육,<br />안전을 준비하는 시간.</h2></div>
           <p className="section-description">건설현장에 처음 들어가는 근로자가 알아야 할 핵심 안전수칙을<br />현장 사례 중심으로 안내합니다.</p>
         </div>
         <div className="about-grid">
@@ -126,34 +150,6 @@ export default async function Home() {
               <p className="instructor-description">{instructor.description}</p>
             </article>)}
           </div>
-        </div>
-      </section>
-
-      <section className="schedule-section section" id="schedule"><div className="container">
-        <div className="section-heading"><div><p className="eyebrow">SCHEDULE</p><h2>교육시간·접수 안내</h2></div><div className="schedule-heading-note"><span className="outline-tag">전화·방문 접수</span><p className="section-description">아래 운영시간과 달력을 확인한 뒤<br />전화로 교육일을 문의해 주세요.</p></div></div>
-        <div className="schedule-summary" aria-label="교육 운영 안내"><div><span>평일 교육 · 접수 12:40까지</span><strong>월요일~금요일 13:00~17:00</strong></div><div><span>토요일 예약제</span><strong>토요일 09:00~13:00</strong></div><div><span>휴무 안내</span><strong>일요일·법정공휴일 휴무</strong></div></div>
-        <ol className="registration-steps" aria-label="교육 접수 방법">
-          <li><span>01</span><div><h3>전화로 교육일 확인</h3><p><a href={company.phoneHref}>{company.phone}</a>로 교육일과 접수 가능 인원을 확인하세요. 토요일은 전화로 미리 예약해 주세요.</p></div></li>
-          <li><span>02</span><div><h3>신분증 지참 후 방문</h3><p>평일은 12:40까지 접수해 주세요. 토요일은 예약 시 안내받은 시간에 방문하세요.</p></div></li>
-          <li><span>03</span><div><h3>현장에서 접수 안내</h3><p>본인 확인과 교육비 등 접수 절차를 안내받으세요. 홈페이지에서는 온라인 신청·결제를 받지 않습니다.</p></div></li>
-        </ol>
-        <EducationSchedule />
-      </div></section>
-
-      <section className="section container facility-section" id="facility">
-        <div className="section-heading"><div><p className="eyebrow">OUR CLASSROOM</p><h2>교육 현장과 실습</h2></div><p className="section-description">한국안전교육의 실제 강의실과<br />안전보건교육 모습을 확인하세요.</p></div>
-        <div className="facility-grid">
-          {gallery.map(item => <article className="facility-card" key={item.file}>
-            <div className="facility-image"><Image src={`/images/center/${item.file}`} alt={item.alt} width={item.width} height={item.height} sizes="(max-width: 800px) calc(100vw - 40px), (max-width: 1280px) 30vw, 370px" /></div>
-            <div><h3>{item.title}</h3><p>{item.text}</p></div>
-          </article>)}
-        </div>
-        <p className="image-disclaimer">위 사진은 한국안전교육에서 제공한 실제 교육 현장 사진입니다. 촬영 당시 모습으로 현재 교육 구성은 달라질 수 있습니다.</p>
-      </section>
-
-      <section className="preparation-section section" aria-labelledby="preparation-title">
-        <div className="container"><div className="section-heading"><div><p className="eyebrow">BEFORE CLASS</p><h2 id="preparation-title">방문 전 확인사항</h2></div><p className="section-description">신분증·주차 위치·교육비를 미리 확인하세요.</p></div>
-          <div className="preparation-grid">{preparations.map((item) => <article key={item.number}><span>{item.number}</span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
         </div>
       </section>
 

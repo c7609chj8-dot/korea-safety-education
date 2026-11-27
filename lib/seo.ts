@@ -13,7 +13,7 @@ export const siteUrl = resolveSiteUrl(process.env.SITE_URL || 'https://korea-saf
 export const isPublicProduction = process.env.VERCEL_ENV === 'production';
 export const siteTitle = '양산안전교육 · 건설업 기초안전보건교육 | 한국안전교육';
 export const siteDescription = '양산 한국안전교육의 건설업 기초안전보건교육 안내. 평일 13~17시, 토요일 오전 예약제, 교육비·신분증·오시는 길을 확인하세요. 경남 양산시 북정서길 22, 201호. 문의 055-389-0302.';
-export const shareImage = '/images/safety/01-safety-education-hero.png';
+export const shareImage = '/images/center/harness-practice.jpg';
 
 export function pageMetadata({ title, description, path, searchable = true }: { title: string; description: string; path: string; searchable?: boolean }): Metadata {
   const index = isPublicProduction && searchable;
@@ -25,7 +25,7 @@ export function pageMetadata({ title, description, path, searchable = true }: { 
     robots: { index, follow: isPublicProduction, googleBot: { index, follow: isPublicProduction, 'max-image-preview': 'large' } },
     openGraph: {
       title, description, url, siteName: '한국안전교육', type: 'website', locale: 'ko_KR',
-      images: [{ url: new URL(shareImage, siteUrl).toString(), width: 1536, height: 1024, alt: '한국안전교육 안전모·보안경·장갑 교육용 생성 이미지' }],
+      images: [{ url: new URL(shareImage, siteUrl).toString(), width: 1613, height: 907, alt: '한국안전교육 실제 안전대 체험 실습 현장' }],
     },
     twitter: { card: 'summary_large_image', title, description, images: [new URL(shareImage, siteUrl).toString()] },
   };
